@@ -458,41 +458,59 @@
 <!-- TAB: TARIFAS -->
 <div class="screen" id="screen-tarifas">
   <div class="card">
-    <div class="card-label">Configurar tarifas</div>
+    <div class="card-label">Tarifa mínima (viajes cortos)</div>
     <div class="input-row">
       <div class="input-group">
-        <label class="input-label">Banderazo</label>
-        <input type="number" id="banderazo" value="25" min="0" step="1" oninput="guardarTarifas()">
-        <div class="prefix">$ por salida</div>
+        <label class="input-label">Cobro mínimo</label>
+        <input type="number" id="minimo" value="20" min="0" step="1" oninput="guardarTarifas()">
+        <div class="prefix">$ fijos</div>
       </div>
       <div class="input-group">
-        <label class="input-label">Por kilómetro</label>
-        <input type="number" id="por_km" value="6" min="0" step="0.5" oninput="guardarTarifas()">
-        <div class="prefix">$ / km</div>
+        <label class="input-label">Hasta cuántos km</label>
+        <input type="number" id="km_minimo" value="1.5" min="0" step="0.5" oninput="guardarTarifas()">
+        <div class="prefix">km</div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-label">Resumen actual</div>
-    <div id="setting-preview">
-      <div class="setting-row">
-        <div><div class="setting-name">Salida fija</div><div class="setting-desc">Cobro al arrancar</div></div>
-        <div class="setting-val" id="prev-banderazo">$25</div>
+    <div class="card-label">Tarifa por kilómetro (viajes largos)</div>
+    <div class="input-row">
+      <div class="input-group">
+        <label class="input-label">Precio por km</label>
+        <input type="number" id="por_km" value="6.50" min="0" step="0.25" oninput="guardarTarifas()">
+        <div class="prefix">$ / km</div>
       </div>
-      <div class="setting-row">
-        <div><div class="setting-name">Costo por km</div><div class="setting-desc">Se suma a la salida</div></div>
-        <div class="setting-val" id="prev-km">$6/km</div>
-      </div>
-      <div class="setting-row">
-        <div><div class="setting-name">Ejemplo 10 km</div><div class="setting-desc">Banderazo + 10 km</div></div>
-        <div class="setting-val" id="prev-ejemplo">$85</div>
+      <div class="input-group">
+        <label class="input-label">Renta por hora</label>
+        <input type="number" id="por_hora" value="130" min="0" step="10" oninput="guardarTarifas()">
+        <div class="prefix">$ / hr</div>
       </div>
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-label">Cómo funciona</div>
+    <div class="setting-row">
+      <div><div class="setting-name">Viajes cortos</div><div class="setting-desc" id="prev-corto">Hasta 1.5 km → $20 fijos</div></div>
+      <div class="setting-val" id="prev-minimo">$20</div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-name">Viajes largos</div><div class="setting-desc" id="prev-largo">Más de 1.5 km → $20 + km × $6.50</div></div>
+      <div class="setting-val" id="prev-km">$6.50/km</div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-name">Ejemplo 5 km</div><div class="setting-desc">$20 + 5km × $6.50</div></div>
+      <div class="setting-val" id="prev-ej1">$53</div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-name">Ejemplo 15 km</div><div class="setting-desc">$20 + 15km × $6.50</div></div>
+      <div class="setting-val" id="prev-ej2">$118</div>
+    </div>
+  </div>
+
   <div class="tip-box">
-    <strong>Tip:</strong> Los taxis en CDMX cobran ~$13–15/km. Tú podrías cobrar $5–8/km al ser chofer de confianza. El banderazo de $25 cubre los primeros km sin que salgas perdiendo en viajes cortos.
+    <strong>Tarifa basada en taxis de la zona:</strong> $20 fijos para viajes cortos (hasta 1.5km), luego $20 + $6.50/km. Así siempre cobras un poco menos que el taxi y le conviene a tu tía.
   </div>
 </div>
 
@@ -595,6 +613,15 @@
     );
   }
 
+  function calcularTarifa(km) {
+    const minimo = parseFloat(document.getElementById('minimo').value) || 20;
+    const kmMinimo = parseFloat(document.getElementById('km_minimo').value) || 1.5;
+    const pKm = parseFloat(document.getElementById('por_km').value) || 6.50;
+    if (km <= kmMinimo) return { total: minimo, detalle: '$' + minimo + ' (tarifa mínima)' };
+    const total = minimo + km * pKm;
+    return { total, detalle: '$' + minimo + ' + ' + km.toFixed(2) + 'km × $' + pKm };
+  }
+
   function terminarViaje() {
     activo = false;
     if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
@@ -604,15 +631,12 @@
     document.getElementById('gps-badge').textContent = 'GPS listo';
     setStatus('done', 'Viaje terminado');
 
-    const b = parseFloat(document.getElementById('banderazo').value) || 0;
-    const pKm = parseFloat(document.getElementById('por_km').value) || 0;
     const km = kmActual;
-    const total = b + km * pKm;
+    const { total, detalle } = calcularTarifa(km);
     lastSavedKm = km;
 
     document.getElementById('total-final').textContent = '$' + total.toFixed(2);
-    document.getElementById('breakdown-final').textContent =
-      '$' + b + ' + ' + km.toFixed(2) + 'km × $' + pKm;
+    document.getElementById('breakdown-final').textContent = detalle;
     document.getElementById('resultado-card').style.display = 'block';
   }
 
@@ -627,16 +651,25 @@
   }
 
   function guardarViaje() {
-    const b = parseFloat(document.getElementById('banderazo').value) || 0;
-    const pKm = parseFloat(document.getElementById('por_km').value) || 0;
     const km = lastSavedKm;
-    const total = b + km * pKm;
+    const { total } = calcularTarifa(km);
     const hora = new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'});
     const seg = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
     const m = Math.floor(seg/60), s = seg % 60;
     viajes.push({ km: km.toFixed(2), total, hora, tiempo: m + ':' + (s < 10 ? '0' : '') + s });
     renderHistorial();
-    document.getElementById('btn-save') && (document.getElementById('btn-save').textContent = 'Guardado ✓');
+  }
+
+  function guardarTarifas() {
+    const minimo = parseFloat(document.getElementById('minimo').value) || 20;
+    const kmMin = parseFloat(document.getElementById('km_minimo').value) || 1.5;
+    const k = parseFloat(document.getElementById('por_km').value) || 6.50;
+    document.getElementById('prev-minimo').textContent = '$' + minimo;
+    document.getElementById('prev-km').textContent = '$' + k + '/km';
+    document.getElementById('prev-corto').textContent = 'Hasta ' + kmMin + ' km → $' + minimo + ' fijos';
+    document.getElementById('prev-largo').textContent = 'Más de ' + kmMin + ' km → $' + minimo + ' + km × $' + k;
+    document.getElementById('prev-ej1').textContent = '$' + (minimo + 5 * k).toFixed(0);
+    document.getElementById('prev-ej2').textContent = '$' + (minimo + 15 * k).toFixed(0);
   }
 
   function renderHistorial() {
@@ -673,13 +706,7 @@
     el.classList.add('active');
   }
 
-  function guardarTarifas() {
-    const b = parseFloat(document.getElementById('banderazo').value) || 0;
-    const k = parseFloat(document.getElementById('por_km').value) || 0;
-    document.getElementById('prev-banderazo').textContent = '$' + b;
-    document.getElementById('prev-km').textContent = '$' + k + '/km';
-    document.getElementById('prev-ejemplo').textContent = '$' + (b + 10 * k).toFixed(0);
-  }
+
 
   guardarTarifas();
 </script>
