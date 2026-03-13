@@ -403,28 +403,54 @@
 
   <div class="error-box" id="error-box"></div>
 
-  <div class="card">
-    <div class="status-row">
-      <div class="status-dot" id="status-dot"></div>
-      <span class="status-text" id="status-text">Listo para iniciar</span>
-    </div>
+  <!-- MODE SELECTOR -->
+  <div style="display:flex; gap:8px; margin-bottom:16px;" id="mode-selector">
+    <button id="btn-modo-km" onclick="setModo('km')" style="flex:1; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--green); background:var(--green-dim); color:var(--green); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer;">Por km</button>
+    <button id="btn-modo-hora" onclick="setModo('hora')" style="flex:1; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border2); background:none; color:var(--text2); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer;">Por hora</button>
+  </div>
 
-    <div class="stats-grid">
-      <div class="stat-box">
-        <div class="stat-val" id="km-display">0.00</div>
-        <div class="stat-unit">km</div>
+  <!-- MODO KM -->
+  <div id="panel-km">
+    <div class="card">
+      <div class="status-row">
+        <div class="status-dot" id="status-dot"></div>
+        <span class="status-text" id="status-text">Listo para iniciar</span>
       </div>
-      <div class="stat-box">
-        <div class="stat-val" id="tiempo-display">0:00</div>
-        <div class="stat-unit">tiempo</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="km-display">0.00</div>
+          <div class="stat-unit">km</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="tiempo-display">0:00</div>
+          <div class="stat-unit">tiempo</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="puntos-display">0</div>
+          <div class="stat-unit">puntos</div>
+        </div>
       </div>
-      <div class="stat-box">
-        <div class="stat-val" id="puntos-display">0</div>
-        <div class="stat-unit">puntos</div>
-      </div>
+      <button class="btn-main btn-go" id="main-btn" onclick="toggleViaje()">Iniciar viaje</button>
     </div>
+  </div>
 
-    <button class="btn-main btn-go" id="main-btn" onclick="toggleViaje()">Iniciar viaje</button>
+  <!-- MODO HORA -->
+  <div id="panel-hora" style="display:none;">
+    <div class="card">
+      <div class="status-row">
+        <div class="status-dot" id="status-dot-hora"></div>
+        <span class="status-text" id="status-text-hora">Listo para iniciar</span>
+      </div>
+      <div style="text-align:center; padding:20px 0;">
+        <div style="font-family:'DM Mono',monospace; font-size:52px; font-weight:500; color:var(--text); letter-spacing:0.05em;" id="cronometro">0:00:00</div>
+        <div style="font-size:12px; color:var(--text3); margin-top:6px; text-transform:uppercase; letter-spacing:0.08em;">horas · minutos · segundos</div>
+      </div>
+      <div style="background:var(--bg3); border-radius:var(--radius-sm); padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:13px; color:var(--text2);">Tarifa por hora</span>
+        <span style="font-family:'DM Mono',monospace; font-size:16px; color:var(--amber);" id="tarifa-hora-display">$130/hr</span>
+      </div>
+      <button class="btn-main btn-go" id="btn-hora" onclick="toggleHora()">Iniciar tiempo</button>
+    </div>
   </div>
 
   <div id="resultado-card" style="display:none;">
@@ -515,7 +541,75 @@
 </div>
 
 <script>
-  let activo = false;
+  let modo = 'km';
+  let horaActivo = false;
+  let horaStart = null;
+  let horaInterval = null;
+  let horaSegundos = 0;
+  let lastModo = 'km';
+
+  function setModo(m) {
+    modo = m;
+    document.getElementById('panel-km').style.display = m === 'km' ? 'block' : 'none';
+    document.getElementById('panel-hora').style.display = m === 'hora' ? 'block' : 'none';
+    document.getElementById('btn-modo-km').style.border = m === 'km' ? '1px solid var(--green)' : '1px solid var(--border2)';
+    document.getElementById('btn-modo-km').style.background = m === 'km' ? 'var(--green-dim)' : 'none';
+    document.getElementById('btn-modo-km').style.color = m === 'km' ? 'var(--green)' : 'var(--text2)';
+    document.getElementById('btn-modo-hora').style.border = m === 'hora' ? '1px solid var(--amber)' : '1px solid var(--border2)';
+    document.getElementById('btn-modo-hora').style.background = m === 'hora' ? 'var(--amber-dim)' : 'none';
+    document.getElementById('btn-modo-hora').style.color = m === 'hora' ? 'var(--amber)' : 'var(--text2)';
+    document.getElementById('resultado-card').style.display = 'none';
+    const ph = parseFloat(document.getElementById('por_hora').value) || 130;
+    document.getElementById('tarifa-hora-display').textContent = '$' + ph + '/hr';
+  }
+
+  function toggleHora() {
+    if (!horaActivo) iniciarHora();
+    else terminarHora();
+  }
+
+  function iniciarHora() {
+    horaActivo = true;
+    horaStart = Date.now();
+    horaSegundos = 0;
+    lastModo = 'hora';
+    document.getElementById('btn-hora').textContent = 'Terminar tiempo';
+    document.getElementById('btn-hora').className = 'btn-main btn-stop';
+    document.getElementById('mode-selector').style.pointerEvents = 'none';
+    document.getElementById('status-dot-hora').className = 'status-dot active';
+    document.getElementById('status-text-hora').textContent = 'Contando tiempo...';
+    horaInterval = setInterval(() => {
+      horaSegundos = Math.floor((Date.now() - horaStart) / 1000);
+      const h = Math.floor(horaSegundos / 3600);
+      const m = Math.floor((horaSegundos % 3600) / 60);
+      const s = horaSegundos % 60;
+      document.getElementById('cronometro').textContent =
+        h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+    }, 1000);
+  }
+
+  function terminarHora() {
+    horaActivo = false;
+    clearInterval(horaInterval);
+    document.getElementById('btn-hora').textContent = 'Iniciar tiempo';
+    document.getElementById('btn-hora').className = 'btn-main btn-go';
+    document.getElementById('mode-selector').style.pointerEvents = 'auto';
+    document.getElementById('status-dot-hora').className = 'status-dot done';
+    document.getElementById('status-text-hora').textContent = 'Tiempo terminado';
+
+    const ph = parseFloat(document.getElementById('por_hora').value) || 130;
+    const horas = horaSegundos / 3600;
+    const total = ph * horas;
+    const h = Math.floor(horaSegundos / 3600);
+    const m = Math.floor((horaSegundos % 3600) / 60);
+
+    document.getElementById('total-final').textContent = '$' + total.toFixed(2);
+    document.getElementById('breakdown-final').textContent =
+      h + 'h ' + m + 'min × $' + ph + '/hr';
+    document.getElementById('resultado-card').style.display = 'block';
+  }
+
+
   let watchId = null;
   let coords = [];
   let startTime = null;
@@ -645,18 +739,31 @@
     document.getElementById('km-display').textContent = '0.00';
     document.getElementById('tiempo-display').textContent = '0:00';
     document.getElementById('puntos-display').textContent = '0';
+    document.getElementById('cronometro').textContent = '0:00:00';
+    document.getElementById('status-dot-hora').className = 'status-dot';
+    document.getElementById('status-text-hora').textContent = 'Listo para iniciar';
     setStatus('', 'Listo para iniciar');
     kmActual = 0;
     coords = [];
+    horaSegundos = 0;
   }
 
   function guardarViaje() {
-    const km = lastSavedKm;
-    const { total } = calcularTarifa(km);
     const hora = new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'});
-    const seg = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
-    const m = Math.floor(seg/60), s = seg % 60;
-    viajes.push({ km: km.toFixed(2), total, hora, tiempo: m + ':' + (s < 10 ? '0' : '') + s });
+    if (lastModo === 'hora') {
+      const ph = parseFloat(document.getElementById('por_hora').value) || 130;
+      const horas = horaSegundos / 3600;
+      const total = ph * horas;
+      const h = Math.floor(horaSegundos / 3600);
+      const m = Math.floor((horaSegundos % 3600) / 60);
+      viajes.push({ km: '—', total, hora, tiempo: h + 'h ' + m + 'min', tipo: 'hora' });
+    } else {
+      const km = lastSavedKm;
+      const { total } = calcularTarifa(km);
+      const seg = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
+      const m = Math.floor(seg/60), s = seg % 60;
+      viajes.push({ km: km.toFixed(2), total, hora, tiempo: m + ':' + (s < 10 ? '0' : '') + s, tipo: 'km' });
+    }
     renderHistorial();
   }
 
@@ -681,8 +788,8 @@
     document.getElementById('historial-lista').innerHTML = viajes.map(v =>
       `<div class="trip-item">
         <div class="trip-left">
-          <div class="trip-hora">${v.hora}</div>
-          <div class="trip-detail">${v.km} km · ${v.tiempo}</div>
+          <div class="trip-hora">${v.hora} · <span style="font-size:11px; color:var(--text3)">${v.tipo === 'hora' ? 'TIEMPO' : 'GPS'}</span></div>
+          <div class="trip-detail">${v.tipo === 'hora' ? v.tiempo : v.km + ' km · ' + v.tiempo}</div>
         </div>
         <div class="trip-monto">$${v.total.toFixed(2)}</div>
       </div>`
