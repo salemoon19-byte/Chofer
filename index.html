@@ -547,6 +547,14 @@
   let horaInterval = null;
   let horaSegundos = 0;
   let lastModo = 'km';
+  let activo = false;
+  let watchId = null;
+  let coords = [];
+  let startTime = null;
+  let timerInterval = null;
+  let viajes = [];
+  let kmActual = 0;
+  let lastSavedKm = 0;
 
   function setModo(m) {
     modo = m;
@@ -608,15 +616,6 @@
       h + 'h ' + m + 'min × $' + ph + '/hr';
     document.getElementById('resultado-card').style.display = 'block';
   }
-
-
-  let watchId = null;
-  let coords = [];
-  let startTime = null;
-  let timerInterval = null;
-  let viajes = [];
-  let kmActual = 0;
-  let lastSavedKm = 0;
 
   function deg2rad(d) { return d * Math.PI / 180; }
 
