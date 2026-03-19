@@ -394,6 +394,7 @@
 
 <div class="tabs">
   <button class="tab active" onclick="switchTab('viaje', this)">Viaje</button>
+  <button class="tab" onclick="switchTab('calcular', this)">Calcular</button>
   <button class="tab" onclick="switchTab('historial', this)">Historial</button>
   <button class="tab" onclick="switchTab('tarifas', this)">Tarifas</button>
 </div>
@@ -537,6 +538,43 @@
 
   <div class="tip-box">
     <strong>Tarifa basada en taxis de la zona:</strong> $20 fijos para viajes cortos (hasta 1.5km), luego $20 + $6.50/km. Así siempre cobras un poco menos que el taxi y le conviene a tu tía.
+  </div>
+</div>
+
+<!-- TAB: CALCULAR -->
+<div class="screen" id="screen-calcular">
+  <div class="card">
+    <div class="card-label">¿Cuántos km son?</div>
+    <div class="input-group" style="margin-bottom:8px;">
+      <label class="input-label">Kilómetros (según Google Maps)</label>
+      <input type="number" id="calc-km" value="" min="0" step="0.1" placeholder="ej. 12.5" oninput="calcularPresupuesto()">
+    </div>
+    <div style="font-size:12px; color:var(--text3); margin-top:6px; line-height:1.5;">
+      Abre Google Maps → busca el destino → toca "Cómo llegar" → anota los km que aparecen
+    </div>
+  </div>
+
+  <div class="card" id="calc-resultado" style="display:none;">
+    <div class="card-label">Presupuesto del viaje</div>
+    <div style="background:var(--green-dim); border:1px solid rgba(0,230,118,0.25); border-radius:var(--radius-sm); padding:16px 20px; margin-bottom:12px;">
+      <div style="font-size:12px; color:var(--green); letter-spacing:0.08em; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:4px;">Total a cobrar</div>
+      <div style="font-family:'DM Mono',monospace; font-size:44px; font-weight:500; color:var(--green);" id="calc-total">$0</div>
+      <div style="font-size:13px; color:rgba(0,230,118,0.6); font-family:'DM Mono',monospace; margin-top:4px;" id="calc-detalle"></div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <div style="flex:1; background:var(--bg3); border-radius:var(--radius-sm); padding:12px; text-align:center;">
+        <div style="font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Distancia</div>
+        <div style="font-family:'DM Mono',monospace; font-size:18px; font-weight:500;" id="calc-km-display">— km</div>
+      </div>
+      <div style="flex:1; background:var(--bg3); border-radius:var(--radius-sm); padding:12px; text-align:center;">
+        <div style="font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Tarifa</div>
+        <div style="font-family:'DM Mono',monospace; font-size:18px; font-weight:500;" id="calc-tarifa-display">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4px;">
+    <strong>Tip:</strong> Este cálculo usa tus tarifas actuales. Si las cambias en "Tarifas", aquí se actualiza automáticamente.
   </div>
 </div>
 
@@ -705,6 +743,25 @@
       { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 }
     );
   }
+
+  function calcularPresupuesto() {
+    const km = parseFloat(document.getElementById('calc-km').value);
+    if (!km || km <= 0) {
+      document.getElementById('calc-resultado').style.display = 'none';
+      return;
+    }
+    const { total, detalle } = calcularTarifa(km);
+    const minimo = parseFloat(document.getElementById('minimo').value) || 20;
+    const kmMin = parseFloat(document.getElementById('km_minimo').value) || 1.5;
+    const pKm = parseFloat(document.getElementById('por_km').value) || 6.50;
+    const tarifaTexto = km <= kmMin ? 'Tarifa mínima' : '$' + pKm + '/km';
+    document.getElementById('calc-total').textContent = '$' + total.toFixed(2);
+    document.getElementById('calc-detalle').textContent = detalle;
+    document.getElementById('calc-km-display').textContent = km.toFixed(1) + ' km';
+    document.getElementById('calc-tarifa-display').textContent = tarifaTexto;
+    document.getElementById('calc-resultado').style.display = 'block';
+  }
+
 
   function calcularTarifa(km) {
     const minimo = parseFloat(document.getElementById('minimo').value) || 20;
