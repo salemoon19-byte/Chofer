@@ -11,33 +11,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg:       #080b0f;
-  --bg2:      #0f1318;
-  --bg3:      #181e26;
-  --bg4:      #1e2630;
-  --border:   rgba(255,255,255,0.07);
-  --border2:  rgba(255,255,255,0.13);
-  --text:     #eef2f7;
-  --text2:    #7a8899;
-  --text3:    #3d4f61;
-  --green:    #00e5a0;
-  --green2:   #00b880;
-  --gdim:     rgba(0,229,160,0.10);
-  --gdim2:    rgba(0,229,160,0.05);
-  --red:      #ff4f6d;
-  --rdim:     rgba(255,79,109,0.10);
-  --amber:    #ffb547;
-  --adim:     rgba(255,181,71,0.10);
-  --blue:     #4fc3f7;
-  --bdim:     rgba(79,195,247,0.10);
-  --radius:   18px;
-  --rsm:      11px;
-  --mono:     'JetBrains Mono', monospace;
-  --sans:     'Syne', sans-serif;
+  --bg:     #080b0f;
+  --bg2:    #0f1318;
+  --bg3:    #181e26;
+  --bg4:    #1e2630;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text:   #eef2f7;
+  --text2:  #7a8899;
+  --text3:  #3d4f61;
+  --green:  #00e5a0;
+  --green2: #00b880;
+  --gdim:   rgba(0,229,160,0.10);
+  --gdim2:  rgba(0,229,160,0.05);
+  --red:    #ff4f6d;
+  --rdim:   rgba(255,79,109,0.10);
+  --amber:  #ffb547;
+  --adim:   rgba(255,181,71,0.10);
+  --blue:   #4fc3f7;
+  --bdim:   rgba(79,195,247,0.10);
+  --purple: #b57cf5;
+  --pdim:   rgba(181,124,245,0.12);
+  --radius: 18px;
+  --rsm:    11px;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'Syne', sans-serif;
 }
-
 html, body {
   background: var(--bg);
   color: var(--text);
@@ -56,50 +56,16 @@ html, body {
   justify-content: space-between;
   background: linear-gradient(180deg, rgba(0,229,160,0.04) 0%, transparent 100%);
 }
-
-.header-eyebrow {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 5px;
-}
-
-.header-name {
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
-
+.header-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+.header-name { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
 .header-badge {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--green);
-  background: var(--gdim);
-  border: 1px solid rgba(0,229,160,0.22);
-  padding: 5px 11px;
-  border-radius: 20px;
-  letter-spacing: 0.07em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s;
+  font-family: var(--mono); font-size: 10px; color: var(--green);
+  background: var(--gdim); border: 1px solid rgba(0,229,160,0.22);
+  padding: 5px 11px; border-radius: 20px; letter-spacing: 0.07em;
+  display: flex; align-items: center; gap: 6px; transition: all 0.3s;
 }
-
-.badge-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .header-badge.tracking { color: var(--amber); background: var(--adim); border-color: rgba(255,181,71,0.22); }
 .header-badge.tracking .badge-dot { background: var(--amber); }
 .header-badge.error-state { color: var(--red); background: var(--rdim); border-color: rgba(255,79,109,0.22); }
@@ -107,563 +73,245 @@ html, body {
 
 /* ── TABS ── */
 .tabs {
-  display: flex;
-  padding: 14px 22px 0;
-  gap: 3px;
+  display: flex; padding: 14px 22px 0; gap: 3px;
   border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
-
 .tab {
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 9px 14px;
-  border-radius: var(--rsm) var(--rsm) 0 0;
-  cursor: pointer;
-  color: var(--text2);
-  border: 1px solid transparent;
-  border-bottom: none;
-  background: none;
-  white-space: nowrap;
-  transition: all 0.2s;
-  letter-spacing: 0.01em;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 9px 14px; border-radius: var(--rsm) var(--rsm) 0 0;
+  cursor: pointer; color: var(--text2); border: 1px solid transparent;
+  border-bottom: none; background: none; white-space: nowrap;
+  transition: all 0.2s; letter-spacing: 0.01em;
 }
-
-.tab.active {
-  color: var(--text);
-  background: var(--bg2);
-  border-color: var(--border);
-  border-bottom-color: var(--bg2);
-  margin-bottom: -1px;
-}
+.tab.active { color: var(--text); background: var(--bg2); border-color: var(--border); border-bottom-color: var(--bg2); margin-bottom: -1px; }
 
 /* ── SCREENS ── */
 .screen { display: none; padding: 20px; }
 .screen.active { display: block; }
 
 /* ── CARDS ── */
-.card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 14px;
-}
-
-.card-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 16px;
-}
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; }
+.card-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
 
 /* ── INPUTS ── */
 .input-row { display: flex; gap: 10px; }
 .input-group { flex: 1; }
-
-.input-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text2);
-  margin-bottom: 7px;
-  display: block;
-  letter-spacing: 0.04em;
-}
-
+.input-label { font-family: var(--mono); font-size: 11px; color: var(--text2); margin-bottom: 7px; display: block; letter-spacing: 0.04em; }
 input[type=number] {
-  width: 100%;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: var(--rsm);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 21px;
-  font-weight: 500;
-  padding: 11px 13px;
-  outline: none;
-  -webkit-appearance: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--rsm); color: var(--text); font-family: var(--mono);
+  font-size: 21px; font-weight: 500; padding: 11px 13px; outline: none;
+  -webkit-appearance: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
-
-input[type=number]:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(0,229,160,0.08);
-}
-
+input[type=number]:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,229,160,0.08); }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-
-.prefix {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-  margin-top: 5px;
-}
+.prefix { font-family: var(--mono); font-size: 11px; color: var(--text3); margin-top: 5px; }
 
 /* ── MODE SELECTOR ── */
-.mode-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
+.mode-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
 .mode-btn {
-  padding: 12px 10px;
-  border-radius: var(--rsm);
-  border: 1px solid var(--border2);
-  background: none;
-  color: var(--text2);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.22s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
+  padding: 12px 10px; border-radius: var(--rsm); border: 1px solid var(--border2);
+  background: none; color: var(--text2); font-family: var(--sans); font-size: 14px;
+  font-weight: 600; cursor: pointer; transition: all 0.22s;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
   -webkit-tap-highlight-color: transparent;
 }
-
 .mode-btn .icon { font-size: 16px; }
-.mode-btn.active-km { border-color: var(--green); background: var(--gdim); color: var(--green); }
+.mode-btn.active-km   { border-color: var(--green); background: var(--gdim); color: var(--green); }
 .mode-btn.active-hora { border-color: var(--amber); background: var(--adim); color: var(--amber); }
 
+/* ── CARGOS EXTRA ── */
+.cargos-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.cargo-chip {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  padding: 7px 13px; border-radius: 20px; cursor: pointer;
+  border: 1px solid var(--border2); background: none; color: var(--text2);
+  transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; gap: 5px; letter-spacing: 0.03em;
+}
+.cargo-chip.active-noche  { border-color: var(--purple); background: var(--pdim); color: var(--purple); }
+.cargo-chip.active-punta  { border-color: var(--amber);  background: var(--adim);  color: var(--amber); }
+.cargo-chip.active-zona   { border-color: var(--red);    background: var(--rdim);  color: var(--red); }
+.cargos-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+
 /* ── STATUS ── */
-.status-row {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 18px;
-}
-
-.status-dot {
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--text3);
-  flex-shrink: 0;
-  transition: background 0.3s;
-}
-
-.status-dot.active {
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(0,229,160,0.18);
-  animation: pulse 1.6s infinite;
-}
-
+.status-row { display: flex; align-items: center; gap: 9px; margin-bottom: 18px; }
+.status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text3); flex-shrink: 0; transition: background 0.3s; }
+.status-dot.active { background: var(--green); box-shadow: 0 0 0 4px rgba(0,229,160,0.18); animation: pulse 1.6s infinite; }
 .status-dot.done { background: var(--blue); }
 .status-dot.error { background: var(--red); }
-
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 4px rgba(0,229,160,0.18); }
-  50% { box-shadow: 0 0 0 9px rgba(0,229,160,0.04); }
-}
-
-.status-text {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text2);
-  letter-spacing: 0.03em;
-}
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 4px rgba(0,229,160,0.18)} 50%{box-shadow:0 0 0 9px rgba(0,229,160,0.04)} }
+.status-text { font-family: var(--mono); font-size: 12px; color: var(--text2); letter-spacing: 0.03em; }
 
 /* ── STATS GRID ── */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.stats-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
+.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 18px; }
 .stat-box {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--rsm);
-  padding: 13px 8px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--rsm); padding: 13px 8px; text-align: center;
+  position: relative; overflow: hidden;
 }
-
-.stat-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--green);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.stat-box.live::before { opacity: 1; }
-
-.stat-val {
-  font-family: var(--mono);
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1;
-  margin-bottom: 5px;
-  transition: color 0.3s;
-}
-
+.stat-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--green); opacity:0; transition:opacity 0.3s; }
+.stat-box.live::before { opacity:1; }
+.stat-val { font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--text); line-height:1; margin-bottom:5px; transition: color 0.3s; }
 .stat-box.live .stat-val { color: var(--green); }
 .stat-unit { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
 
-/* ── SPEED INDICATOR ── */
-.speed-bar-wrap {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--rsm);
-  padding: 12px 14px;
-  margin-bottom: 18px;
-  display: none;
-}
-
-.speed-bar-wrap.visible { display: block; }
-.speed-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.speed-label { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
-.speed-val { font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--text); }
-
-.speed-track {
-  height: 4px;
-  background: var(--bg4);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.speed-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--green), var(--amber));
-  transition: width 0.8s ease;
-  width: 0%;
-}
+/* ── SPEED BAR ── */
+.speed-bar-wrap { background:var(--bg3); border:1px solid var(--border); border-radius:var(--rsm); padding:12px 14px; margin-bottom:18px; display:none; }
+.speed-bar-wrap.visible { display:block; }
+.speed-bar-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.speed-label { font-family:var(--mono); font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; }
+.speed-val { font-family:var(--mono); font-size:15px; font-weight:600; color:var(--text); }
+.speed-track { height:4px; background:var(--bg4); border-radius:2px; overflow:hidden; }
+.speed-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--green),var(--amber)); transition:width 0.8s ease; width:0%; }
 
 /* ── BUTTONS ── */
 .btn-main {
-  width: 100%;
-  padding: 17px;
-  border-radius: var(--radius);
-  border: none;
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
+  width:100%; padding:17px; border-radius:var(--radius); border:none;
+  font-family:var(--sans); font-size:16px; font-weight:700; cursor:pointer;
+  letter-spacing:0.02em; transition:all 0.2s; -webkit-tap-highlight-color:transparent;
+  position:relative; overflow:hidden;
 }
-
-.btn-main:active { transform: scale(0.97); }
-
-.btn-go {
-  background: var(--green);
-  color: #03100a;
-}
-
-.btn-go:hover { background: #1af5b0; }
-
-.btn-stop {
-  background: var(--red);
-  color: #fff;
-}
-
-.btn-new {
-  background: var(--bg3);
-  color: var(--text);
-  border: 1px solid var(--border2);
-}
+.btn-main:active { transform:scale(0.97); }
+.btn-go   { background:var(--green); color:#03100a; }
+.btn-go:hover { background:#1af5b0; }
+.btn-stop { background:var(--red); color:#fff; }
+.btn-new  { background:var(--bg3); color:var(--text); border:1px solid var(--border2); }
 
 /* ── RESULT ── */
 .result-card {
-  background: linear-gradient(135deg, rgba(0,229,160,0.12), rgba(0,229,160,0.05));
-  border: 1px solid rgba(0,229,160,0.28);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-top: 14px;
-  animation: slideUp 0.3s ease;
+  background:linear-gradient(135deg,rgba(0,229,160,0.12),rgba(0,229,160,0.05));
+  border:1px solid rgba(0,229,160,0.28); border-radius:var(--radius);
+  padding:20px; margin-top:14px; animation:slideUp 0.3s ease;
 }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.result-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--green2);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.result-total {
-  font-family: var(--mono);
-  font-size: 52px;
-  font-weight: 600;
-  color: var(--green);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.result-breakdown {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: rgba(0,229,160,0.5);
-}
-
+@keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.result-label { font-family:var(--mono); font-size:10px; color:var(--green2); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:7px; }
+.result-total { font-family:var(--mono); font-size:52px; font-weight:600; color:var(--green); letter-spacing:-0.03em; line-height:1; margin-bottom:8px; }
+.result-breakdown { font-family:var(--mono); font-size:12px; color:rgba(0,229,160,0.5); }
+.result-cargos { font-family:var(--mono); font-size:11px; color:rgba(255,181,71,0.7); margin-top:4px; }
 .btn-save {
-  width: 100%;
-  margin-top: 14px;
-  padding: 13px;
-  background: none;
-  border: 1px solid rgba(0,229,160,0.3);
-  border-radius: var(--rsm);
-  color: var(--green);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
+  width:100%; margin-top:14px; padding:13px; background:none;
+  border:1px solid rgba(0,229,160,0.3); border-radius:var(--rsm);
+  color:var(--green); font-family:var(--sans); font-size:14px;
+  font-weight:600; cursor:pointer; transition:all 0.2s; -webkit-tap-highlight-color:transparent;
 }
-
-.btn-save:active { background: var(--gdim); }
-.btn-save:disabled { opacity: 0.4; cursor: default; }
-.btn-save.saved { background: var(--gdim); border-color: var(--green); color: var(--green); }
+.btn-save:active { background:var(--gdim); }
+.btn-save:disabled { opacity:0.4; cursor:default; }
+.btn-save.saved { background:var(--gdim); border-color:var(--green); color:var(--green); }
 
 /* ── ERROR BOX ── */
 .error-box {
-  background: var(--rdim);
-  border: 1px solid rgba(255,79,109,0.25);
-  border-radius: var(--rsm);
-  padding: 12px 15px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--red);
-  margin-bottom: 14px;
-  display: none;
-  line-height: 1.6;
-  animation: slideUp 0.3s ease;
+  background:var(--rdim); border:1px solid rgba(255,79,109,0.25);
+  border-radius:var(--rsm); padding:12px 15px; font-family:var(--mono);
+  font-size:12px; color:var(--red); margin-bottom:14px; display:none;
+  line-height:1.6; animation:slideUp 0.3s ease;
 }
 
 /* ── HORA PANEL ── */
-.chrono-display {
-  text-align: center;
-  padding: 24px 0 20px;
-}
-
-.chrono-num {
-  font-family: var(--mono);
-  font-size: 56px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.03em;
-  line-height: 1;
-  transition: color 0.3s;
-}
-
-.chrono-num.running { color: var(--amber); }
-.chrono-unit { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.12em; }
-
-.tarifa-pill {
-  background: var(--bg3);
-  border-radius: var(--rsm);
-  padding: 11px 15px;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.tarifa-pill-label { font-family: var(--mono); font-size: 11px; color: var(--text2); }
-.tarifa-pill-val { font-family: var(--mono); font-size: 15px; color: var(--amber); font-weight: 600; }
+.chrono-display { text-align:center; padding:24px 0 20px; }
+.chrono-num { font-family:var(--mono); font-size:56px; font-weight:600; color:var(--text); letter-spacing:0.03em; line-height:1; transition:color 0.3s; }
+.chrono-num.running { color:var(--amber); }
+.chrono-unit { font-family:var(--mono); font-size:10px; color:var(--text3); margin-top:8px; text-transform:uppercase; letter-spacing:0.12em; }
+.tarifa-pill { background:var(--bg3); border-radius:var(--rsm); padding:11px 15px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; }
+.tarifa-pill-label { font-family:var(--mono); font-size:11px; color:var(--text2); }
+.tarifa-pill-val { font-family:var(--mono); font-size:15px; color:var(--amber); font-weight:600; }
 
 /* ── HISTORY ── */
-.history-empty {
-  text-align: center;
-  padding: 36px 20px;
-  color: var(--text3);
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.6;
-}
+.history-empty { text-align:center; padding:36px 20px; color:var(--text3); font-family:var(--mono); font-size:13px; line-height:1.6; }
+.trip-item { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--border); animation:slideUp 0.2s ease; }
+.trip-item:last-child { border-bottom:none; }
+.trip-left { flex:1; }
+.trip-hora { font-family:var(--mono); font-size:12px; color:var(--text2); margin-bottom:3px; }
+.trip-detail { font-family:var(--mono); font-size:11px; color:var(--text3); }
+.trip-badge { display:inline-block; font-size:9px; letter-spacing:0.08em; padding:2px 6px; border-radius:4px; margin-left:4px; text-transform:uppercase; }
+.trip-badge.km   { background:var(--gdim); color:var(--green2); }
+.trip-badge.hora { background:var(--adim); color:var(--amber); }
+.trip-cargo-tags { margin-top:3px; display:flex; gap:4px; flex-wrap:wrap; }
+.trip-cargo-tag { font-family:var(--mono); font-size:9px; padding:1px 5px; border-radius:3px; }
+.trip-cargo-tag.noche { background:var(--pdim); color:var(--purple); }
+.trip-cargo-tag.punta { background:var(--adim); color:var(--amber); }
+.trip-cargo-tag.zona  { background:var(--rdim); color:var(--red); }
+.trip-monto { font-family:var(--mono); font-size:19px; font-weight:600; color:var(--green); }
+.total-day-row { display:flex; justify-content:space-between; align-items:center; padding:15px 18px; background:var(--bg3); border-radius:var(--rsm); margin-top:14px; border:1px solid var(--border); }
+.total-day-label { font-family:var(--sans); font-size:13px; color:var(--text2); font-weight:600; }
+.total-day-val { font-family:var(--mono); font-size:24px; font-weight:600; color:var(--amber); }
+.btn-clear { width:100%; margin-top:10px; padding:12px; background:none; border:1px solid var(--border2); border-radius:var(--rsm); color:var(--text3); font-family:var(--sans); font-size:13px; font-weight:600; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:all 0.2s; }
+.btn-clear:active { color:var(--red); border-color:rgba(255,79,109,0.3); }
 
-.trip-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-  animation: slideUp 0.2s ease;
-}
+/* ── SETTINGS / TARIFAS ── */
+.setting-row { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--border); }
+.setting-row:last-child { border-bottom:none; }
+.setting-name { font-family:var(--sans); font-size:14px; font-weight:600; color:var(--text); }
+.setting-desc { font-family:var(--mono); font-size:11px; color:var(--text3); margin-top:3px; }
+.setting-val { font-family:var(--mono); font-size:14px; color:var(--amber); font-weight:600; }
+.tip-box { background:var(--adim); border:1px solid rgba(255,181,71,0.18); border-radius:var(--rsm); padding:14px 16px; font-family:var(--mono); font-size:12px; color:rgba(255,181,71,0.7); line-height:1.7; margin-top:14px; }
+.tip-box strong { color:var(--amber); font-weight:600; }
 
-.trip-item:last-child { border-bottom: none; }
+/* ── CALCULAR ── */
+.calc-result-big { background:linear-gradient(135deg,rgba(0,229,160,0.1),rgba(0,229,160,0.04)); border:1px solid rgba(0,229,160,0.22); border-radius:var(--rsm); padding:16px 18px; margin-bottom:12px; }
+.calc-total { font-family:var(--mono); font-size:46px; font-weight:600; color:var(--green); line-height:1; }
+.calc-detalle { font-family:var(--mono); font-size:12px; color:rgba(0,229,160,0.5); margin-top:5px; }
+.mini-stat { flex:1; background:var(--bg3); border-radius:var(--rsm); padding:11px 10px; text-align:center; }
+.mini-stat-label { font-family:var(--mono); font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px; }
+.mini-stat-val { font-family:var(--mono); font-size:16px; font-weight:600; }
 
-.trip-left { flex: 1; }
-
-.trip-hora {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text2);
-  margin-bottom: 3px;
-}
-
-.trip-detail {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-}
-
-.trip-badge {
-  display: inline-block;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-left: 4px;
-  text-transform: uppercase;
-}
-
-.trip-badge.gps { background: var(--gdim); color: var(--green2); }
-.trip-badge.hora { background: var(--adim); color: var(--amber); }
-
-.trip-monto { font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--green); }
-
-.total-day-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 18px;
-  background: var(--bg3);
-  border-radius: var(--rsm);
-  margin-top: 14px;
-  border: 1px solid var(--border);
-}
-
-.total-day-label { font-family: var(--sans); font-size: 13px; color: var(--text2); font-weight: 600; }
-.total-day-val { font-family: var(--mono); font-size: 24px; font-weight: 600; color: var(--amber); }
-
-.btn-clear {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: none;
-  border: 1px solid var(--border2);
-  border-radius: var(--rsm);
-  color: var(--text3);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: all 0.2s;
-}
-
-.btn-clear:active { color: var(--red); border-color: rgba(255,79,109,0.3); }
-
-/* ── SETTINGS ── */
-.setting-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.setting-row:last-child { border-bottom: none; }
-.setting-name { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text); }
-.setting-desc { font-family: var(--mono); font-size: 11px; color: var(--text3); margin-top: 3px; }
-.setting-val { font-family: var(--mono); font-size: 14px; color: var(--amber); font-weight: 600; }
-
-.tip-box {
-  background: var(--adim);
-  border: 1px solid rgba(255,181,71,0.18);
-  border-radius: var(--rsm);
-  padding: 14px 16px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: rgba(255,181,71,0.7);
-  line-height: 1.7;
-  margin-top: 14px;
-}
-
-.tip-box strong { color: var(--amber); font-weight: 600; }
-
-/* ── CALC ── */
-.calc-result-big {
-  background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,229,160,0.04));
-  border: 1px solid rgba(0,229,160,0.22);
-  border-radius: var(--rsm);
-  padding: 16px 18px;
-  margin-bottom: 12px;
-}
-
-.calc-total {
-  font-family: var(--mono);
-  font-size: 46px;
-  font-weight: 600;
-  color: var(--green);
-  line-height: 1;
-}
-
-.calc-detalle {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: rgba(0,229,160,0.5);
-  margin-top: 5px;
-}
-
-.mini-stat {
-  flex: 1;
-  background: var(--bg3);
-  border-radius: var(--rsm);
-  padding: 11px 10px;
-  text-align: center;
-}
-
-.mini-stat-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
-.mini-stat-val { font-family: var(--mono); font-size: 16px; font-weight: 600; }
+/* ── ESTADÍSTICAS ── */
+.stats-week-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.stat-week-box { background:var(--bg3); border:1px solid var(--border); border-radius:var(--rsm); padding:14px 12px; }
+.stat-week-label { font-family:var(--mono); font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; }
+.stat-week-val { font-family:var(--mono); font-size:22px; font-weight:600; color:var(--text); line-height:1; }
+.stat-week-sub { font-family:var(--mono); font-size:10px; color:var(--text3); margin-top:3px; }
+.bar-chart { margin-bottom:14px; }
+.bar-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.bar-day { font-family:var(--mono); font-size:10px; color:var(--text3); width:28px; flex-shrink:0; text-transform:uppercase; }
+.bar-track { flex:1; height:8px; background:var(--bg3); border-radius:4px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--green2),var(--green)); transition:width 0.6s ease; }
+.bar-val { font-family:var(--mono); font-size:10px; color:var(--text2); width:52px; text-align:right; flex-shrink:0; }
+.week-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.week-nav-btn { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--rsm); color:var(--text2); font-family:var(--mono); font-size:12px; padding:7px 14px; cursor:pointer; transition:all 0.2s; -webkit-tap-highlight-color:transparent; }
+.week-nav-btn:active { color:var(--text); }
+.week-nav-btn:disabled { opacity:0.3; cursor:default; }
+.week-title { font-family:var(--mono); font-size:11px; color:var(--text2); letter-spacing:0.05em; }
+.empty-stats { text-align:center; padding:36px 20px; color:var(--text3); font-family:var(--mono); font-size:13px; line-height:1.7; }
+.best-day-badge { display:inline-flex; align-items:center; gap:5px; background:var(--adim); border:1px solid rgba(255,181,71,0.2); border-radius:6px; padding:3px 8px; font-family:var(--mono); font-size:10px; color:var(--amber); margin-top:6px; }
 
 /* ── TOAST ── */
 .toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: var(--bg4);
-  border: 1px solid var(--border2);
-  border-radius: 24px;
-  padding: 11px 20px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text);
-  z-index: 999;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  white-space: nowrap;
-  pointer-events: none;
+  position:fixed; bottom:24px; left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--bg4); border:1px solid var(--border2);
+  border-radius:24px; padding:11px 20px; font-family:var(--mono);
+  font-size:13px; color:var(--text); z-index:999;
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  white-space:nowrap; pointer-events:none;
 }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast.green { color:var(--green); border-color:rgba(0,229,160,0.25); }
 
-.toast.show { transform: translateX(-50%) translateY(0); }
-.toast.green { color: var(--green); border-color: rgba(0,229,160,0.25); }
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.7);
+  display:flex; align-items:flex-end; justify-content:center;
+  z-index:900; opacity:0; pointer-events:none;
+  transition:opacity 0.25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:auto; }
+.modal-box {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:var(--radius) var(--radius) 0 0;
+  padding:28px 22px 40px; width:100%; max-width:480px;
+  transform:translateY(30px); transition:transform 0.25s;
+}
+.modal-overlay.open .modal-box { transform:translateY(0); }
+.modal-title { font-size:18px; font-weight:800; margin-bottom:6px; }
+.modal-sub { font-family:var(--mono); font-size:12px; color:var(--text3); margin-bottom:20px; line-height:1.5; }
+.modal-btn-row { display:flex; gap:10px; margin-top:18px; }
+.modal-btn { flex:1; padding:14px; border-radius:var(--rsm); border:none; font-family:var(--sans); font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; -webkit-tap-highlight-color:transparent; }
+.modal-btn-cancel { background:var(--bg3); color:var(--text2); border:1px solid var(--border2); }
+.modal-btn-confirm { background:var(--red); color:#fff; }
 </style>
 </head>
 <body>
@@ -680,13 +328,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('viaje', this)">Viaje</button>
-  <button class="tab" onclick="switchTab('calcular', this)">Calcular</button>
-  <button class="tab" onclick="switchTab('historial', this)">Historial</button>
-  <button class="tab" onclick="switchTab('tarifas', this)">Tarifas</button>
+  <button class="tab active"  onclick="switchTab('viaje',this)">Viaje</button>
+  <button class="tab"         onclick="switchTab('calcular',this)">Calcular</button>
+  <button class="tab"         onclick="switchTab('historial',this)">Historial</button>
+  <button class="tab"         onclick="switchTab('estadisticas',this)">Stats</button>
+  <button class="tab"         onclick="switchTab('tarifas',this)">Tarifas</button>
 </div>
 
-<!-- TAB: VIAJE -->
+<!-- ═══ TAB: VIAJE ═══ -->
 <div class="screen active" id="screen-viaje">
   <div class="error-box" id="error-box"></div>
 
@@ -699,6 +348,16 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     </button>
   </div>
 
+  <!-- Cargos extra -->
+  <div id="cargos-container">
+    <div class="cargos-label">Cargos adicionales</div>
+    <div class="cargos-row">
+      <button class="cargo-chip" id="chip-noche" onclick="toggleCargo('noche')">🌙 Nocturno</button>
+      <button class="cargo-chip" id="chip-punta" onclick="toggleCargo('punta')">🔴 Hora punta</button>
+      <button class="cargo-chip" id="chip-zona"  onclick="toggleCargo('zona')">📍 Zona difícil</button>
+    </div>
+  </div>
+
   <!-- MODO KM -->
   <div id="panel-km">
     <div class="card">
@@ -706,7 +365,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
         <div class="status-dot" id="status-dot"></div>
         <span class="status-text" id="status-text">Listo para iniciar</span>
       </div>
-
       <div class="stats-grid">
         <div class="stat-box" id="stat-km">
           <div class="stat-val" id="km-display">0.00</div>
@@ -721,17 +379,13 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
           <div class="stat-unit">puntos GPS</div>
         </div>
       </div>
-
       <div class="speed-bar-wrap" id="speed-wrap">
         <div class="speed-bar-header">
           <span class="speed-label">Velocidad</span>
           <span class="speed-val" id="speed-val">0 km/h</span>
         </div>
-        <div class="speed-track">
-          <div class="speed-fill" id="speed-fill"></div>
-        </div>
+        <div class="speed-track"><div class="speed-fill" id="speed-fill"></div></div>
       </div>
-
       <button class="btn-main btn-go" id="main-btn" onclick="toggleViaje()">Iniciar viaje</button>
     </div>
   </div>
@@ -743,17 +397,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
         <div class="status-dot" id="status-dot-hora"></div>
         <span class="status-text" id="status-text-hora">Listo para iniciar</span>
       </div>
-
       <div class="chrono-display">
         <div class="chrono-num" id="cronometro">0:00:00</div>
         <div class="chrono-unit">horas · minutos · segundos</div>
       </div>
-
       <div class="tarifa-pill">
         <span class="tarifa-pill-label">Tarifa por hora</span>
         <span class="tarifa-pill-val" id="tarifa-hora-display">$130/hr</span>
       </div>
-
       <button class="btn-main btn-go" id="btn-hora" onclick="toggleHora()">Iniciar tiempo</button>
     </div>
   </div>
@@ -764,13 +415,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <div class="result-label">Total a cobrar</div>
       <div class="result-total" id="total-final">$0.00</div>
       <div class="result-breakdown" id="breakdown-final"></div>
+      <div class="result-cargos"   id="cargos-final"></div>
       <button class="btn-save" id="btn-save" onclick="guardarViaje()">Guardar en historial</button>
     </div>
     <button class="btn-main btn-new" onclick="nuevoViaje()" style="margin-top:12px;">Nuevo viaje</button>
   </div>
 </div>
 
-<!-- TAB: CALCULAR -->
+<!-- ═══ TAB: CALCULAR ═══ -->
 <div class="screen" id="screen-calcular">
   <div class="card">
     <div class="card-label">¿Cuántos km son?</div>
@@ -778,19 +430,18 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <label class="input-label">Kilómetros (según Google Maps)</label>
       <input type="number" id="calc-km" min="0" step="0.1" placeholder="ej. 12.5" oninput="calcularPresupuesto()">
     </div>
-    <div style="font-family:var(--mono); font-size:11px; color:var(--text3); margin-top:8px; line-height:1.7;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:8px;line-height:1.7;">
       Google Maps → destino → "Cómo llegar" → anota los km
     </div>
   </div>
-
   <div class="card" id="calc-resultado" style="display:none;">
     <div class="card-label">Presupuesto del viaje</div>
     <div class="calc-result-big">
-      <div style="font-family:var(--mono); font-size:10px; color:var(--green2); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:5px;">Total a cobrar</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--green2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:5px;">Total a cobrar</div>
       <div class="calc-total" id="calc-total">$0</div>
       <div class="calc-detalle" id="calc-detalle"></div>
     </div>
-    <div style="display:flex; gap:8px;">
+    <div style="display:flex;gap:8px;">
       <div class="mini-stat">
         <div class="mini-stat-label">Distancia</div>
         <div class="mini-stat-val" id="calc-km-display">— km</div>
@@ -801,13 +452,12 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       </div>
     </div>
   </div>
-
   <div class="tip-box">
     <strong>Tip:</strong> Usa tus tarifas actuales. Cámbialas en "Tarifas" y aquí se actualiza solo.
   </div>
 </div>
 
-<!-- TAB: HISTORIAL -->
+<!-- ═══ TAB: HISTORIAL ═══ -->
 <div class="screen" id="screen-historial">
   <div class="card">
     <div class="card-label">Viajes del día</div>
@@ -820,11 +470,50 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <span class="total-day-label">Total del día</span>
       <span class="total-day-val" id="total-dia">$0</span>
     </div>
-    <button class="btn-clear" onclick="limpiarHistorial()">Borrar historial del día</button>
+    <button class="btn-clear" onclick="confirmarLimpiar()">Borrar historial del día</button>
   </div>
 </div>
 
-<!-- TAB: TARIFAS -->
+<!-- ═══ TAB: ESTADÍSTICAS ═══ -->
+<div class="screen" id="screen-estadisticas">
+  <div class="card">
+    <div class="week-nav">
+      <button class="week-nav-btn" id="btn-prev-week" onclick="cambiarSemana(-1)">← Anterior</button>
+      <span class="week-title" id="week-title">Esta semana</span>
+      <button class="week-nav-btn" id="btn-next-week" onclick="cambiarSemana(1)" disabled>Siguiente →</button>
+    </div>
+    <div class="stats-week-grid" id="stats-week-grid">
+      <div class="stat-week-box">
+        <div class="stat-week-label">Ingresos</div>
+        <div class="stat-week-val" id="sw-ingresos">$0</div>
+        <div class="stat-week-sub" id="sw-ingresos-sub">esta semana</div>
+      </div>
+      <div class="stat-week-box">
+        <div class="stat-week-label">Viajes</div>
+        <div class="stat-week-val" id="sw-viajes">0</div>
+        <div class="stat-week-sub" id="sw-viajes-sub">registrados</div>
+      </div>
+      <div class="stat-week-box">
+        <div class="stat-week-label">Promedio / viaje</div>
+        <div class="stat-week-val" id="sw-promedio">$0</div>
+        <div class="stat-week-sub">por viaje</div>
+      </div>
+      <div class="stat-week-box">
+        <div class="stat-week-label">Km totales</div>
+        <div class="stat-week-val" id="sw-km">0</div>
+        <div class="stat-week-sub">kilómetros GPS</div>
+      </div>
+    </div>
+    <div class="card-label" style="margin-bottom:12px;">Ingresos por día</div>
+    <div class="bar-chart" id="bar-chart"></div>
+    <div id="best-day-row"></div>
+  </div>
+  <div id="stats-empty" class="empty-stats" style="display:none;">
+    Sin datos en esta semana.<br>Guarda viajes y aparecerán aquí.
+  </div>
+</div>
+
+<!-- ═══ TAB: TARIFAS ═══ -->
 <div class="screen" id="screen-tarifas">
   <div class="card">
     <div class="card-label">Tarifa mínima</div>
@@ -841,7 +530,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-label">Tarifa por distancia / tiempo</div>
     <div class="input-row">
@@ -857,87 +545,128 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       </div>
     </div>
   </div>
-
   <div class="card">
-    <div class="card-label">Vista previa de tarifas</div>
-    <div class="setting-row">
-      <div>
-        <div class="setting-name">Viajes cortos</div>
-        <div class="setting-desc" id="prev-corto">Hasta 1.5 km → $20 fijos</div>
+    <div class="card-label">Cargos extra (%)</div>
+    <div class="input-row">
+      <div class="input-group">
+        <label class="input-label">🌙 Nocturno (10pm–6am)</label>
+        <input type="number" id="pct_noche" value="20" min="0" max="100" step="5" oninput="guardarTarifas()">
+        <div class="prefix">% extra</div>
       </div>
+      <div class="input-group">
+        <label class="input-label">🔴 Hora punta</label>
+        <input type="number" id="pct_punta" value="15" min="0" max="100" step="5" oninput="guardarTarifas()">
+        <div class="prefix">% extra</div>
+      </div>
+    </div>
+    <div class="input-row" style="margin-top:10px;">
+      <div class="input-group">
+        <label class="input-label">📍 Zona difícil</label>
+        <input type="number" id="pct_zona" value="25" min="0" max="100" step="5" oninput="guardarTarifas()">
+        <div class="prefix">% extra</div>
+      </div>
+      <div class="input-group"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Vista previa</div>
+    <div class="setting-row">
+      <div><div class="setting-name">Viajes cortos</div><div class="setting-desc" id="prev-corto">Hasta 1.5 km → $20 fijos</div></div>
       <div class="setting-val" id="prev-minimo">$20</div>
     </div>
     <div class="setting-row">
-      <div>
-        <div class="setting-name">Viajes largos</div>
-        <div class="setting-desc" id="prev-largo">Más de 1.5 km → $20 + km × $6.50</div>
-      </div>
+      <div><div class="setting-name">Viajes largos</div><div class="setting-desc" id="prev-largo">Más de 1.5 km → km × $6.50</div></div>
       <div class="setting-val" id="prev-km">$6.50/km</div>
     </div>
     <div class="setting-row">
-      <div>
-        <div class="setting-name">Ejemplo: 5 km</div>
-        <div class="setting-desc">$20 + 5 × $6.50</div>
-      </div>
+      <div><div class="setting-name">Ejemplo: 5 km</div><div class="setting-desc">$20 + 5 × $6.50</div></div>
       <div class="setting-val" id="prev-ej1">$53</div>
     </div>
     <div class="setting-row">
-      <div>
-        <div class="setting-name">Ejemplo: 15 km</div>
-        <div class="setting-desc">$20 + 15 × $6.50</div>
-      </div>
-      <div class="setting-val" id="prev-ej2">$118</div>
+      <div><div class="setting-name">Nocturno 5 km</div><div class="setting-desc" id="prev-noche-desc">+20% sobre base</div></div>
+      <div class="setting-val" id="prev-noche">$63</div>
     </div>
   </div>
-
   <div class="tip-box">
-    <strong>Basado en taxis de la zona:</strong> $20 fijos hasta 1.5 km, luego $20 + $6.50/km. Siempre un poco más barato que el taxi.
+    <strong>Sugerencia:</strong> Nocturno actívalo manual al iniciar el viaje. La app aplica el % automáticamente al cobro.
   </div>
 </div>
 
-<!-- TOAST -->
+<!-- MODAL confirmación -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-title" id="modal-title">¿Borrar historial?</div>
+    <div class="modal-sub"  id="modal-sub">Esta acción no se puede deshacer.</div>
+    <div class="modal-btn-row">
+      <button class="modal-btn modal-btn-cancel"  onclick="cerrarModal()">Cancelar</button>
+      <button class="modal-btn modal-btn-confirm" id="modal-confirm-btn">Borrar</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────────
+// ─── STATE ────────────────────────────────────────────────────────────────────
 let modo       = 'km';
 let activo     = false;
 let watchId    = null;
 let coords     = [];
 let startTime  = null;
-let timerInterval = null;
+let timerInterval  = null;
 let kmActual   = 0;
-let viajePendiente = null;    // FIX: guardamos datos del viaje terminado aquí
-let viajeGuardado = false;
+let viajePendiente = null;
+let viajeGuardado  = false;
 
 let horaActivo   = false;
 let horaStart    = null;
 let horaInterval = null;
 let horaSegundos = 0;
 
-let viajes = [];              // FIX: persistencia localStorage
+// Cargos activos
+let cargosActivos = { noche: false, punta: false, zona: false };
+
+// Historial (hoy)
+let viajes = [];
+
+// Estadísticas — semana offset (0 = esta semana, -1 = semana pasada, etc.)
+let semanaOffset = 0;
+const DIAS = ['dom','lun','mar','mié','jue','vie','sáb'];
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 (function init() {
   cargarDatos();
-  guardarTarifas();
+  guardarTarifas();   // actualiza displays con valores cargados
   renderHistorial();
+  // FIX: nocturno automático si es de noche al cargar
+  detectarNocturnoAuto();
 })();
 
-// ─── PERSISTENCIA ────────────────────────────────────────────────────────────
+function detectarNocturnoAuto() {
+  const h = new Date().getHours();
+  if (h >= 22 || h < 6) {
+    cargosActivos.noche = true;
+    document.getElementById('chip-noche').className = 'cargo-chip active-noche';
+  }
+}
+
+// ─── PERSISTENCIA ─────────────────────────────────────────────────────────────
 function cargarDatos() {
   try {
     const t = localStorage.getItem('cp_tarifas');
     if (t) {
       const d = JSON.parse(t);
-      if (d.minimo   !== undefined) document.getElementById('minimo').value    = d.minimo;
-      if (d.km_min   !== undefined) document.getElementById('km_minimo').value = d.km_min;
-      if (d.por_km   !== undefined) document.getElementById('por_km').value    = d.por_km;
-      if (d.por_hora !== undefined) document.getElementById('por_hora').value  = d.por_hora;
+      if (d.minimo     !== undefined) document.getElementById('minimo').value     = d.minimo;
+      if (d.km_min     !== undefined) document.getElementById('km_minimo').value  = d.km_min;
+      if (d.por_km     !== undefined) document.getElementById('por_km').value     = d.por_km;
+      if (d.por_hora   !== undefined) document.getElementById('por_hora').value   = d.por_hora;
+      if (d.pct_noche  !== undefined) document.getElementById('pct_noche').value  = d.pct_noche;
+      if (d.pct_punta  !== undefined) document.getElementById('pct_punta').value  = d.pct_punta;
+      if (d.pct_zona   !== undefined) document.getElementById('pct_zona').value   = d.pct_zona;
     }
     const v = localStorage.getItem('cp_viajes_hoy');
     if (v) {
-      const hoy = new Date().toDateString();
+      const hoy  = new Date().toDateString();
       const data = JSON.parse(v);
       if (data.fecha === hoy) viajes = data.viajes || [];
     }
@@ -947,97 +676,151 @@ function cargarDatos() {
 function persistirTarifas() {
   try {
     localStorage.setItem('cp_tarifas', JSON.stringify({
-      minimo:   parseFloat(document.getElementById('minimo').value),
-      km_min:   parseFloat(document.getElementById('km_minimo').value),
-      por_km:   parseFloat(document.getElementById('por_km').value),
-      por_hora: parseFloat(document.getElementById('por_hora').value),
+      minimo:    parseFloat(document.getElementById('minimo').value),
+      km_min:    parseFloat(document.getElementById('km_minimo').value),
+      por_km:    parseFloat(document.getElementById('por_km').value),
+      por_hora:  parseFloat(document.getElementById('por_hora').value),
+      pct_noche: parseFloat(document.getElementById('pct_noche').value),
+      pct_punta: parseFloat(document.getElementById('pct_punta').value),
+      pct_zona:  parseFloat(document.getElementById('pct_zona').value),
     }));
   } catch(e) {}
 }
 
 function persistirViajes() {
   try {
-    localStorage.setItem('cp_viajes_hoy', JSON.stringify({
-      fecha: new Date().toDateString(),
-      viajes
-    }));
+    // Guarda hoy + historial semanal extendido
+    const hoy = new Date().toDateString();
+    localStorage.setItem('cp_viajes_hoy', JSON.stringify({ fecha: hoy, viajes }));
+
+    // Stats: guarda en clave por fecha ISO
+    const iso = isoDate(new Date());
+    const existing = JSON.parse(localStorage.getItem('cp_stats_' + iso) || '[]');
+    localStorage.setItem('cp_stats_' + iso, JSON.stringify(viajes));
   } catch(e) {}
 }
 
-// ─── FORMATO ─────────────────────────────────────────────────────────────────
+function isoDate(d) {
+  return d.toISOString().split('T')[0]; // "2025-01-15"
+}
+
+// ─── FORMATO ──────────────────────────────────────────────────────────────────
 function fmt(n) {
   return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
+function fmtInt(n) {
+  return '$' + Math.round(n).toLocaleString('es-MX');
+}
 
-// ─── TOAST ───────────────────────────────────────────────────────────────────
+// ─── TOAST ────────────────────────────────────────────────────────────────────
 let toastTimer;
-function showToast(msg, type = '') {
+function showToast(msg, type='') {
   const el = document.getElementById('toast');
   el.textContent = msg;
-  el.className = 'toast show' + (type ? ' ' + type : '');
+  el.className = 'toast show' + (type ? ' '+type : '');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { el.className = 'toast'; }, 2800);
 }
 
-// ─── MODO SELECTOR ───────────────────────────────────────────────────────────
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+let modalCallback = null;
+function mostrarModal(title, sub, label, cb) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-sub').textContent   = sub;
+  const btn = document.getElementById('modal-confirm-btn');
+  btn.textContent = label;
+  btn.onclick = () => { cerrarModal(); cb(); };
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModal();
+});
+
+// ─── CARGOS EXTRA ─────────────────────────────────────────────────────────────
+function toggleCargo(tipo) {
+  if (activo || horaActivo) return; // no cambiar en viaje activo
+  cargosActivos[tipo] = !cargosActivos[tipo];
+  const chip = document.getElementById('chip-' + tipo);
+  const clsMap = { noche:'active-noche', punta:'active-punta', zona:'active-zona' };
+  chip.className = 'cargo-chip' + (cargosActivos[tipo] ? ' '+clsMap[tipo] : '');
+}
+
+function calcularCargos(base) {
+  const pcts = {
+    noche: parseFloat(document.getElementById('pct_noche').value) || 20,
+    punta: parseFloat(document.getElementById('pct_punta').value) || 15,
+    zona:  parseFloat(document.getElementById('pct_zona').value)  || 25,
+  };
+  let extra = 0;
+  const tags = [];
+  for (const [k, activo] of Object.entries(cargosActivos)) {
+    if (activo) {
+      extra += base * (pcts[k] / 100);
+      const nombres = { noche:'Nocturno', punta:'Hora punta', zona:'Zona difícil' };
+      tags.push(nombres[k] + ' +' + pcts[k] + '%');
+    }
+  }
+  return { extra, tags };
+}
+
+// ─── MODO SELECTOR ────────────────────────────────────────────────────────────
 function setModo(m) {
-  if (activo || horaActivo) return; // no cambiar si hay viaje activo
+  if (activo || horaActivo) return;
   modo = m;
   document.getElementById('panel-km').style.display   = m === 'km'   ? 'block' : 'none';
   document.getElementById('panel-hora').style.display = m === 'hora' ? 'block' : 'none';
   document.getElementById('resultado-card').style.display = 'none';
-
   document.getElementById('btn-modo-km').className  = 'mode-btn' + (m === 'km'   ? ' active-km'   : '');
   document.getElementById('btn-modo-hora').className = 'mode-btn' + (m === 'hora' ? ' active-hora' : '');
+  actualizarTarifaHoraDisplay();
+}
 
+function actualizarTarifaHoraDisplay() {
   const ph = parseFloat(document.getElementById('por_hora').value) || 130;
   document.getElementById('tarifa-hora-display').textContent = '$' + ph + '/hr';
 }
 
-// ─── GPS HELPERS ─────────────────────────────────────────────────────────────
+// ─── GPS HELPERS ──────────────────────────────────────────────────────────────
 function deg2rad(d) { return d * Math.PI / 180; }
-
 function distancia(a, b) {
-  const R = 6371, dLat = deg2rad(b.lat - a.lat), dLon = deg2rad(b.lon - a.lon);
+  const R = 6371, dLat = deg2rad(b.lat-a.lat), dLon = deg2rad(b.lon-a.lon);
   const x = Math.sin(dLat/2)**2 + Math.cos(deg2rad(a.lat))*Math.cos(deg2rad(b.lat))*Math.sin(dLon/2)**2;
   return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1-x));
 }
-
 function kmTotal() {
   let t = 0;
   for (let i = 1; i < coords.length; i++) t += distancia(coords[i-1], coords[i]);
   return t;
 }
 
-// ─── VIAJE KM ────────────────────────────────────────────────────────────────
+// ─── VIAJE KM ─────────────────────────────────────────────────────────────────
 function setStatus(tipo, texto) {
   const dot = document.getElementById('status-dot');
   dot.className = 'status-dot' + (tipo ? ' '+tipo : '');
   document.getElementById('status-text').textContent = texto;
 }
-
 function mostrarError(msg) {
   const el = document.getElementById('error-box');
   el.textContent = msg;
   el.style.display = 'block';
   setBadge('error');
 }
-
 function ocultarError() { document.getElementById('error-box').style.display = 'none'; }
-
 function setBadge(state) {
   const badge = document.getElementById('gps-badge');
   const text  = document.getElementById('badge-text');
   badge.className = 'header-badge' + (state !== 'ready' ? ' '+state : '');
-  const labels = { ready: 'GPS listo', tracking: 'Rastreando', error: 'GPS error' };
+  const labels = { ready:'GPS listo', tracking:'Rastreando', error:'GPS error' };
   text.textContent = labels[state] || state;
 }
-
 function actualizarTimer() {
   if (!startTime) return;
   const seg = Math.floor((Date.now() - startTime) / 1000);
-  const m = Math.floor(seg / 60), s = seg % 60;
-  document.getElementById('tiempo-display').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  const m = Math.floor(seg/60), s = seg%60;
+  document.getElementById('tiempo-display').textContent = m + ':' + (s<10?'0':'') + s;
 }
 
 function toggleViaje() {
@@ -1050,36 +833,35 @@ function iniciarViaje() {
     return;
   }
   ocultarError();
-  coords = [];
-  kmActual = 0;
+  coords    = [];
+  kmActual  = 0;
   startTime = Date.now();
-  activo = true;
-  viajeGuardado = false;
+  activo    = true;
+  viajeGuardado  = false;
   viajePendiente = null;
   document.getElementById('main-btn').textContent = 'Terminar viaje';
-  document.getElementById('main-btn').className = 'btn-main btn-stop';
+  document.getElementById('main-btn').className   = 'btn-main btn-stop';
   document.getElementById('resultado-card').style.display = 'none';
-  document.getElementById('km-display').textContent = '0.00';
+  document.getElementById('km-display').textContent     = '0.00';
   document.getElementById('puntos-display').textContent = '0';
   document.getElementById('mode-selector').style.pointerEvents = 'none';
+  document.getElementById('cargos-container').style.pointerEvents = 'none';
   document.getElementById('speed-wrap').classList.add('visible');
   ['stat-km','stat-tiempo','stat-pts'].forEach(id => document.getElementById(id).classList.add('live'));
   setBadge('tracking');
   setStatus('active', 'Rastreando ruta...');
   timerInterval = setInterval(actualizarTimer, 1000);
-
   watchId = navigator.geolocation.watchPosition(
     pos => {
       const p = { lat: pos.coords.latitude, lon: pos.coords.longitude };
       if (coords.length === 0 || distancia(coords[coords.length-1], p) > 0.005) coords.push(p);
       kmActual = kmTotal();
-      document.getElementById('km-display').textContent = kmActual.toFixed(2);
+      document.getElementById('km-display').textContent     = kmActual.toFixed(2);
       document.getElementById('puntos-display').textContent = coords.length;
-      // velocidad
       if (pos.coords.speed != null) {
         const kmh = pos.coords.speed * 3.6;
-        document.getElementById('speed-val').textContent = kmh.toFixed(0) + ' km/h';
-        document.getElementById('speed-fill').style.width = Math.min(kmh / 120 * 100, 100) + '%';
+        document.getElementById('speed-val').textContent       = kmh.toFixed(0) + ' km/h';
+        document.getElementById('speed-fill').style.width      = Math.min(kmh/120*100, 100) + '%';
       }
     },
     err => {
@@ -1088,7 +870,7 @@ function iniciarViaje() {
       else if (err.code === 2) msg = 'GPS no disponible. Sal al exterior o activa la ubicación.';
       else if (err.code === 3) msg = 'GPS tardó mucho. Intenta de nuevo al aire libre.';
       mostrarError(msg);
-      terminarViaje(true);
+      terminarViaje(true);   // error = true → no muestra resultado
     },
     { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 }
   );
@@ -1099,32 +881,44 @@ function terminarViaje(error = false) {
   if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
   clearInterval(timerInterval);
   document.getElementById('main-btn').textContent = 'Iniciar viaje';
-  document.getElementById('main-btn').className = 'btn-main btn-go';
-  document.getElementById('mode-selector').style.pointerEvents = 'auto';
+  document.getElementById('main-btn').className   = 'btn-main btn-go';
+  document.getElementById('mode-selector').style.pointerEvents    = 'auto';
+  document.getElementById('cargos-container').style.pointerEvents = 'auto';
   document.getElementById('speed-wrap').classList.remove('visible');
   ['stat-km','stat-tiempo','stat-pts'].forEach(id => document.getElementById(id).classList.remove('live'));
   setBadge('ready');
-  if (!error) setStatus('done', 'Viaje terminado');
 
+  // FIX: si fue error, no mostrar resultado
+  if (error) {
+    setStatus('error', 'Error de GPS');
+    return;
+  }
+
+  setStatus('done', 'Viaje terminado');
   const km = kmActual;
-  const { total, detalle } = calcularTarifa(km);
-  const seg = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
-  const m = Math.floor(seg/60), s = seg % 60;
+  const { base, detalle } = calcularTarifaBase(km);
+  const { extra, tags }   = calcularCargos(base);
+  const total = base + extra;
+  const seg = startTime ? Math.floor((Date.now()-startTime)/1000) : 0;
+  const m = Math.floor(seg/60), s = seg%60;
 
-  // FIX: guardamos datos completos del viaje para guardarViaje()
   viajePendiente = {
-    tipo: 'km',
-    km: km.toFixed(2),
+    tipo:   'km',
+    km:     km.toFixed(2),
     total,
-    tiempo: m + ':' + (s < 10 ? '0' : '') + s,
-    hora: new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'})
+    base,
+    extra,
+    cargos: [...Object.keys(cargosActivos).filter(k => cargosActivos[k])],
+    tiempo: m + ':' + (s<10?'0':'') + s,
+    hora:   new Date().toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' })
   };
 
   document.getElementById('total-final').textContent = fmt(total);
   document.getElementById('breakdown-final').textContent = detalle;
+  document.getElementById('cargos-final').textContent = tags.length ? '+ ' + tags.join(' · ') : '';
   document.getElementById('resultado-card').style.display = 'block';
-  document.getElementById('btn-save').disabled = false;
-  document.getElementById('btn-save').className = 'btn-save';
+  document.getElementById('btn-save').disabled    = false;
+  document.getElementById('btn-save').className   = 'btn-save';
   document.getElementById('btn-save').textContent = 'Guardar en historial';
 }
 
@@ -1132,139 +926,158 @@ function terminarViaje(error = false) {
 function toggleHora() {
   if (!horaActivo) iniciarHora(); else terminarHora();
 }
-
 function iniciarHora() {
   horaActivo = true;
-  horaStart = Date.now();
-  horaSegundos = 0;
-  viajeGuardado = false;
+  horaStart  = Date.now();
+  horaSegundos   = 0;
+  viajeGuardado  = false;
   viajePendiente = null;
   document.getElementById('btn-hora').textContent = 'Terminar tiempo';
-  document.getElementById('btn-hora').className = 'btn-main btn-stop';
-  document.getElementById('mode-selector').style.pointerEvents = 'none';
-  document.getElementById('status-dot-hora').className = 'status-dot active';
+  document.getElementById('btn-hora').className   = 'btn-main btn-stop';
+  document.getElementById('mode-selector').style.pointerEvents    = 'none';
+  document.getElementById('cargos-container').style.pointerEvents = 'none';
+  document.getElementById('status-dot-hora').className   = 'status-dot active';
   document.getElementById('status-text-hora').textContent = 'Contando tiempo...';
   document.getElementById('cronometro').className = 'chrono-num running';
   horaInterval = setInterval(() => {
-    horaSegundos = Math.floor((Date.now() - horaStart) / 1000);
-    const h = Math.floor(horaSegundos / 3600);
-    const m = Math.floor((horaSegundos % 3600) / 60);
-    const s = horaSegundos % 60;
+    horaSegundos = Math.floor((Date.now()-horaStart)/1000);
+    const h = Math.floor(horaSegundos/3600);
+    const m = Math.floor((horaSegundos%3600)/60);
+    const s = horaSegundos%60;
     document.getElementById('cronometro').textContent =
       h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
   }, 1000);
 }
-
 function terminarHora() {
   horaActivo = false;
   clearInterval(horaInterval);
   document.getElementById('btn-hora').textContent = 'Iniciar tiempo';
-  document.getElementById('btn-hora').className = 'btn-main btn-go';
-  document.getElementById('mode-selector').style.pointerEvents = 'auto';
-  document.getElementById('status-dot-hora').className = 'status-dot done';
+  document.getElementById('btn-hora').className   = 'btn-main btn-go';
+  document.getElementById('mode-selector').style.pointerEvents    = 'auto';
+  document.getElementById('cargos-container').style.pointerEvents = 'auto';
+  document.getElementById('status-dot-hora').className   = 'status-dot done';
   document.getElementById('status-text-hora').textContent = 'Tiempo terminado';
   document.getElementById('cronometro').className = 'chrono-num';
 
   const ph = parseFloat(document.getElementById('por_hora').value) || 130;
   const horas = horaSegundos / 3600;
-  const total = ph * horas;
-  const h = Math.floor(horaSegundos / 3600);
-  const m = Math.floor((horaSegundos % 3600) / 60);
+  const base  = ph * horas;
+  const { extra, tags } = calcularCargos(base);
+  const total = base + extra;
+  const h = Math.floor(horaSegundos/3600);
+  const m = Math.floor((horaSegundos%3600)/60);
 
-  // FIX: guardamos datos completos para guardarViaje()
   viajePendiente = {
-    tipo: 'hora',
-    km: '—',
+    tipo:   'hora',
+    km:     '—',
     total,
+    base,
+    extra,
+    cargos: [...Object.keys(cargosActivos).filter(k => cargosActivos[k])],
     tiempo: h + 'h ' + m + 'min',
-    hora: new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'})
+    hora:   new Date().toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' })
   };
 
   document.getElementById('total-final').textContent = fmt(total);
-  document.getElementById('breakdown-final').textContent =
-    h + 'h ' + m + 'min × $' + ph + '/hr';
+  document.getElementById('breakdown-final').textContent = h + 'h ' + m + 'min × $' + ph + '/hr';
+  document.getElementById('cargos-final').textContent = tags.length ? '+ ' + tags.join(' · ') : '';
   document.getElementById('resultado-card').style.display = 'block';
-  document.getElementById('btn-save').disabled = false;
-  document.getElementById('btn-save').className = 'btn-save';
+  document.getElementById('btn-save').disabled    = false;
+  document.getElementById('btn-save').className   = 'btn-save';
   document.getElementById('btn-save').textContent = 'Guardar en historial';
 }
 
 // ─── GUARDAR VIAJE ────────────────────────────────────────────────────────────
-// FIX: ya no depende de lastModo ni variables globales ambiguas
 function guardarViaje() {
   if (!viajePendiente || viajeGuardado) return;
   viajes.push({ ...viajePendiente });
   viajeGuardado = true;
   persistirViajes();
   renderHistorial();
-  // feedback visual
   document.getElementById('btn-save').textContent = '✓ Guardado';
-  document.getElementById('btn-save').className = 'btn-save saved';
-  document.getElementById('btn-save').disabled = true;
+  document.getElementById('btn-save').className   = 'btn-save saved';
+  document.getElementById('btn-save').disabled    = true;
   showToast('✓ Viaje guardado', 'green');
 }
 
 function nuevoViaje() {
   document.getElementById('resultado-card').style.display = 'none';
-  document.getElementById('km-display').textContent = '0.00';
+  document.getElementById('km-display').textContent     = '0.00';
   document.getElementById('tiempo-display').textContent = '0:00';
   document.getElementById('puntos-display').textContent = '0';
-  document.getElementById('cronometro').textContent = '0:00:00';
-  document.getElementById('cronometro').className = 'chrono-num';
-  document.getElementById('status-dot-hora').className = 'status-dot';
+  document.getElementById('cronometro').textContent  = '0:00:00';
+  document.getElementById('cronometro').className    = 'chrono-num';
+  document.getElementById('status-dot-hora').className    = 'status-dot';
   document.getElementById('status-text-hora').textContent = 'Listo para iniciar';
-  document.getElementById('speed-val').textContent = '0 km/h';
+  document.getElementById('speed-val').textContent  = '0 km/h';
   document.getElementById('speed-fill').style.width = '0%';
   setStatus('', 'Listo para iniciar');
-  kmActual = 0;
-  coords = [];
-  horaSegundos = 0;
-  viajePendiente = null;
-  viajeGuardado = false;
+  kmActual = 0; coords = []; horaSegundos = 0;
+  viajePendiente = null; viajeGuardado = false;
   ocultarError();
+  // Resetear cargos (excepto nocturno si sigue de noche)
+  const esNoche = (() => { const h=new Date().getHours(); return h>=22||h<6; })();
+  cargosActivos = { noche: esNoche, punta: false, zona: false };
+  ['noche','punta','zona'].forEach(tipo => {
+    const clsMap = { noche:'active-noche', punta:'active-punta', zona:'active-zona' };
+    const chip = document.getElementById('chip-' + tipo);
+    chip.className = 'cargo-chip' + (cargosActivos[tipo] ? ' '+clsMap[tipo] : '');
+  });
 }
 
 // ─── TARIFAS ──────────────────────────────────────────────────────────────────
-function calcularTarifa(km) {
+// FIX: fórmula corregida — mínimo cubre los primeros km_minimo km sin costo adicional
+// Para distancias mayores, la tarifa es: minimo + (km - km_minimo) * por_km
+// Interpretación: el mínimo "incluye" km_minimo km; lo que excede se cobra extra
+function calcularTarifaBase(km) {
   const minimo   = parseFloat(document.getElementById('minimo').value)    || 20;
   const kmMinimo = parseFloat(document.getElementById('km_minimo').value) || 1.5;
   const pKm      = parseFloat(document.getElementById('por_km').value)    || 6.50;
-  if (km <= kmMinimo) return { total: minimo, detalle: '$' + minimo + ' (tarifa mínima)' };
-  const total = minimo + km * pKm;
-  return { total, detalle: '$' + minimo + ' + ' + km.toFixed(2) + 'km × $' + pKm };
+  if (km <= kmMinimo) {
+    return { base: minimo, detalle: '$' + minimo + ' (tarifa mínima, ' + km.toFixed(2) + ' km)' };
+  }
+  const base = minimo + (km - kmMinimo) * pKm;
+  return { base, detalle: '$' + minimo + ' + ' + (km-kmMinimo).toFixed(2) + 'km × $' + pKm };
+}
+
+// Alias para calcular (tab Calcular y tarifas)
+function calcularTarifa(km) {
+  const { base, detalle } = calcularTarifaBase(km);
+  return { total: base, detalle };
 }
 
 function guardarTarifas() {
-  const minimo = parseFloat(document.getElementById('minimo').value)    || 20;
-  const kmMin  = parseFloat(document.getElementById('km_minimo').value) || 1.5;
-  const k      = parseFloat(document.getElementById('por_km').value)    || 6.50;
-  const ph     = parseFloat(document.getElementById('por_hora').value)  || 130;
-  document.getElementById('prev-minimo').textContent = '$' + minimo;
-  document.getElementById('prev-km').textContent     = '$' + k + '/km';
-  document.getElementById('prev-corto').textContent  = 'Hasta ' + kmMin + ' km → $' + minimo + ' fijos';
-  document.getElementById('prev-largo').textContent  = 'Más de ' + kmMin + ' km → $' + minimo + ' + km × $' + k;
-  document.getElementById('prev-ej1').textContent    = '$' + (minimo + 5*k).toFixed(0);
-  document.getElementById('prev-ej2').textContent    = '$' + (minimo + 15*k).toFixed(0);
-  document.getElementById('tarifa-hora-display').textContent = '$' + ph + '/hr';
+  const minimo  = parseFloat(document.getElementById('minimo').value)    || 20;
+  const kmMin   = parseFloat(document.getElementById('km_minimo').value) || 1.5;
+  const k       = parseFloat(document.getElementById('por_km').value)    || 6.50;
+  const ph      = parseFloat(document.getElementById('por_hora').value)  || 130;
+  const pNoche  = parseFloat(document.getElementById('pct_noche').value) || 20;
+
+  document.getElementById('prev-minimo').textContent   = '$' + minimo;
+  document.getElementById('prev-km').textContent       = '$' + k + '/km';
+  document.getElementById('prev-corto').textContent    = 'Hasta ' + kmMin + ' km → $' + minimo + ' fijos';
+  document.getElementById('prev-largo').textContent    = 'Más de ' + kmMin + ' km → $' + minimo + ' + (km−' + kmMin + ') × $' + k;
+  const ej5 = minimo + (5 - kmMin) * k;
+  document.getElementById('prev-ej1').textContent      = '$' + ej5.toFixed(0);
+  document.getElementById('prev-noche-desc').textContent = '+' + pNoche + '% sobre base';
+  document.getElementById('prev-noche').textContent    = '$' + (ej5 * (1 + pNoche/100)).toFixed(0);
+  actualizarTarifaHoraDisplay();
   persistirTarifas();
 }
 
-// ─── CALCULAR ────────────────────────────────────────────────────────────────
+// ─── CALCULAR ─────────────────────────────────────────────────────────────────
 function calcularPresupuesto() {
   const km = parseFloat(document.getElementById('calc-km').value);
-  if (!km || km <= 0) {
-    document.getElementById('calc-resultado').style.display = 'none';
-    return;
-  }
+  if (!km || km <= 0) { document.getElementById('calc-resultado').style.display = 'none'; return; }
   const { total, detalle } = calcularTarifa(km);
   const kmMin = parseFloat(document.getElementById('km_minimo').value) || 1.5;
   const pKm   = parseFloat(document.getElementById('por_km').value)    || 6.50;
   const tarifaTxt = km <= kmMin ? 'Mínimo' : '$' + pKm + '/km';
-  document.getElementById('calc-total').textContent        = fmt(total);
-  document.getElementById('calc-detalle').textContent      = detalle;
-  document.getElementById('calc-km-display').textContent   = km.toFixed(1) + ' km';
+  document.getElementById('calc-total').textContent          = fmt(total);
+  document.getElementById('calc-detalle').textContent        = detalle;
+  document.getElementById('calc-km-display').textContent     = km.toFixed(1) + ' km';
   document.getElementById('calc-tarifa-display').textContent = tarifaTxt;
-  document.getElementById('calc-resultado').style.display  = 'block';
+  document.getElementById('calc-resultado').style.display    = 'block';
 }
 
 // ─── HISTORIAL ────────────────────────────────────────────────────────────────
@@ -1275,37 +1088,132 @@ function renderHistorial() {
     document.getElementById('total-dia-box').style.display = 'none';
     return;
   }
-  document.getElementById('historial-lista').innerHTML = viajes.map((v, i) =>
-    `<div class="trip-item">
+  const nombresC = { noche:'🌙', punta:'🔴', zona:'📍' };
+  document.getElementById('historial-lista').innerHTML = viajes.map((v) => {
+    const cargoTags = (v.cargos||[]).map(c =>
+      `<span class="trip-cargo-tag ${c}">${nombresC[c]||c}</span>`
+    ).join('');
+    const detalleKm = v.tipo==='hora' ? v.tiempo : v.km + ' km · ' + v.tiempo;
+    return `<div class="trip-item">
       <div class="trip-left">
-        <div class="trip-hora">${v.hora}<span class="trip-badge ${v.tipo}">${v.tipo === 'hora' ? 'TIEMPO' : 'GPS'}</span></div>
-        <div class="trip-detail">${v.tipo === 'hora' ? v.tiempo : v.km + ' km · ' + v.tiempo}</div>
+        <div class="trip-hora">${v.hora}<span class="trip-badge ${v.tipo}">${v.tipo==='hora'?'TIEMPO':'GPS'}</span></div>
+        <div class="trip-detail">${detalleKm}</div>
+        ${cargoTags ? '<div class="trip-cargo-tags">'+cargoTags+'</div>' : ''}
       </div>
       <div class="trip-monto">${fmt(v.total)}</div>
-    </div>`
-  ).join('');
-  const suma = viajes.reduce((a, v) => a + v.total, 0);
+    </div>`;
+  }).join('');
+  const suma = viajes.reduce((a,v) => a+v.total, 0);
   document.getElementById('total-dia').textContent = fmt(suma);
   document.getElementById('total-dia-box').style.display = 'block';
 }
 
-function limpiarHistorial() {
-  if (confirm('¿Borrar todo el historial de hoy?')) {
+function confirmarLimpiar() {
+  mostrarModal('¿Borrar historial del día?', 'Se eliminan todos los viajes de hoy. No se puede deshacer.', 'Borrar todo', () => {
     viajes = [];
     persistirViajes();
     renderHistorial();
     showToast('Historial borrado');
+  });
+}
+
+// ─── ESTADÍSTICAS ─────────────────────────────────────────────────────────────
+function getLunesDeOffset(offset) {
+  const hoy = new Date();
+  const diaSem = hoy.getDay(); // 0=dom,1=lun...
+  const lunesBase = new Date(hoy);
+  lunesBase.setDate(hoy.getDate() - ((diaSem+6)%7)); // lunes de esta semana
+  lunesBase.setDate(lunesBase.getDate() + offset*7);
+  lunesBase.setHours(0,0,0,0);
+  return lunesBase;
+}
+
+function renderEstadisticas() {
+  const lunes = getLunesDeOffset(semanaOffset);
+  const esEsta = semanaOffset === 0;
+
+  // Título semana
+  const d1 = lunes.getDate() + ' ' + lunes.toLocaleString('es-MX',{month:'short'});
+  const dom = new Date(lunes); dom.setDate(lunes.getDate()+6);
+  const d2  = dom.getDate() + ' ' + dom.toLocaleString('es-MX',{month:'short'});
+  document.getElementById('week-title').textContent = esEsta ? 'Esta semana' : d1 + ' – ' + d2;
+  document.getElementById('btn-next-week').disabled = esEsta;
+
+  // Recopilar datos de los 7 días
+  const dias = [];
+  let totalIngresos = 0, totalViajes = 0, totalKm = 0;
+  const hoy = new Date(); hoy.setHours(23,59,59,999);
+
+  for (let i = 0; i < 7; i++) {
+    const fecha = new Date(lunes);
+    fecha.setDate(lunes.getDate() + i);
+    const iso = isoDate(fecha);
+    let viajesDia = [];
+    try {
+      // Priorizar datos del día actual en memoria
+      if (iso === isoDate(new Date())) {
+        viajesDia = viajes;
+      } else {
+        const raw = localStorage.getItem('cp_stats_' + iso);
+        viajesDia = raw ? JSON.parse(raw) : [];
+      }
+    } catch(e) {}
+    const ingDia = viajesDia.reduce((a,v)=>a+v.total,0);
+    const kmDia  = viajesDia.filter(v=>v.tipo==='km').reduce((a,v)=>a+parseFloat(v.km)||0,0);
+    dias.push({ label: DIAS[fecha.getDay()], ing: ingDia, viajes: viajesDia.length, km: kmDia, future: fecha > hoy });
+    totalIngresos += ingDia;
+    totalViajes   += viajesDia.length;
+    totalKm       += kmDia;
+  }
+
+  const tieneData = totalViajes > 0;
+  document.getElementById('stats-empty').style.display = tieneData ? 'none' : 'block';
+  document.querySelector('#screen-estadisticas .card').style.display = tieneData ? 'block' : 'none';
+
+  if (!tieneData) return;
+
+  // Métricas globales
+  document.getElementById('sw-ingresos').textContent  = fmtInt(totalIngresos);
+  document.getElementById('sw-viajes').textContent    = totalViajes;
+  document.getElementById('sw-promedio').textContent  = totalViajes ? fmtInt(totalIngresos/totalViajes) : '$0';
+  document.getElementById('sw-km').textContent        = totalKm.toFixed(0);
+
+  // Barra chart
+  const maxIng = Math.max(...dias.map(d=>d.ing), 1);
+  document.getElementById('bar-chart').innerHTML = dias.map(d => {
+    const pct = (d.ing / maxIng * 100).toFixed(1);
+    const esHoy = d.label === DIAS[new Date().getDay()] && esEsta;
+    return `<div class="bar-row">
+      <span class="bar-day" style="${esHoy?'color:var(--green)':''}">${d.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${d.future?0:pct}%;${esHoy?'background:var(--green)':''}"></div></div>
+      <span class="bar-val">${d.ing > 0 ? fmtInt(d.ing) : '—'}</span>
+    </div>`;
+  }).join('');
+
+  // Mejor día
+  const mejor = dias.reduce((a,b)=>a.ing>b.ing?a:b, {ing:-1});
+  const bestRow = document.getElementById('best-day-row');
+  if (mejor.ing > 0) {
+    bestRow.innerHTML = `<div class="best-day-badge">⭐ Mejor día: ${mejor.label.toUpperCase()} · ${fmtInt(mejor.ing)}</div>`;
+  } else {
+    bestRow.innerHTML = '';
   }
 }
 
-// ─── NAVEGACIÓN ──────────────────────────────────────────────────────────────
+function cambiarSemana(dir) {
+  semanaOffset += dir;
+  if (semanaOffset > 0) semanaOffset = 0;
+  renderEstadisticas();
+}
+
+// ─── NAVEGACIÓN ───────────────────────────────────────────────────────────────
 function switchTab(name, el) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('screen-' + name).classList.add('active');
   el.classList.add('active');
-  // FIX: recalcular presupuesto al volver a calcular (tarifas pueden haber cambiado)
-  if (name === 'calcular') calcularPresupuesto();
+  if (name === 'calcular')      calcularPresupuesto();
+  if (name === 'estadisticas')  renderEstadisticas();
 }
 </script>
 </body>
