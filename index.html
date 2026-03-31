@@ -8,6 +8,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Chofer">
 <title>Chofer Particular</title>
+<!-- PWA -->
+<link rel="manifest" href="/Chofer/manifest.json">
+<meta name="theme-color" content="#080b0f">
+<link rel="apple-touch-icon" href="/Chofer/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +50,6 @@ html, body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
-
 /* ── HEADER ── */
 .header {
   padding: 54px 22px 18px;
@@ -70,7 +73,6 @@ html, body {
 .header-badge.tracking .badge-dot { background: var(--amber); }
 .header-badge.error-state { color: var(--red); background: var(--rdim); border-color: rgba(255,79,109,0.22); }
 .header-badge.error-state .badge-dot { background: var(--red); }
-
 /* ── TABS ── */
 .tabs {
   display: flex; padding: 14px 22px 0; gap: 3px;
@@ -86,15 +88,12 @@ html, body {
   transition: all 0.2s; letter-spacing: 0.01em;
 }
 .tab.active { color: var(--text); background: var(--bg2); border-color: var(--border); border-bottom-color: var(--bg2); margin-bottom: -1px; }
-
 /* ── SCREENS ── */
 .screen { display: none; padding: 20px; }
 .screen.active { display: block; }
-
 /* ── CARDS ── */
 .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; }
 .card-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
-
 /* ── INPUTS ── */
 .input-row { display: flex; gap: 10px; }
 .input-group { flex: 1; }
@@ -109,7 +108,6 @@ input[type=number]:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgb
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .prefix { font-family: var(--mono); font-size: 11px; color: var(--text3); margin-top: 5px; }
-
 /* ── MODE SELECTOR ── */
 .mode-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
 .mode-btn {
@@ -122,7 +120,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .mode-btn .icon { font-size: 16px; }
 .mode-btn.active-km   { border-color: var(--green); background: var(--gdim); color: var(--green); }
 .mode-btn.active-hora { border-color: var(--amber); background: var(--adim); color: var(--amber); }
-
 /* ── CARGOS EXTRA ── */
 .cargos-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 .cargo-chip {
@@ -136,7 +133,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .cargo-chip.active-punta  { border-color: var(--amber);  background: var(--adim);  color: var(--amber); }
 .cargo-chip.active-zona   { border-color: var(--red);    background: var(--rdim);  color: var(--red); }
 .cargos-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-
 /* ── STATUS ── */
 .status-row { display: flex; align-items: center; gap: 9px; margin-bottom: 18px; }
 .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text3); flex-shrink: 0; transition: background 0.3s; }
@@ -145,7 +141,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .status-dot.error { background: var(--red); }
 @keyframes pulse { 0%,100%{box-shadow:0 0 0 4px rgba(0,229,160,0.18)} 50%{box-shadow:0 0 0 9px rgba(0,229,160,0.04)} }
 .status-text { font-family: var(--mono); font-size: 12px; color: var(--text2); letter-spacing: 0.03em; }
-
 /* ── STATS GRID ── */
 .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 18px; }
 .stat-box {
@@ -158,7 +153,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .stat-val { font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--text); line-height:1; margin-bottom:5px; transition: color 0.3s; }
 .stat-box.live .stat-val { color: var(--green); }
 .stat-unit { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
-
 /* ── SPEED BAR ── */
 .speed-bar-wrap { background:var(--bg3); border:1px solid var(--border); border-radius:var(--rsm); padding:12px 14px; margin-bottom:18px; display:none; }
 .speed-bar-wrap.visible { display:block; }
@@ -167,7 +161,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .speed-val { font-family:var(--mono); font-size:15px; font-weight:600; color:var(--text); }
 .speed-track { height:4px; background:var(--bg4); border-radius:2px; overflow:hidden; }
 .speed-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--green),var(--amber)); transition:width 0.8s ease; width:0%; }
-
 /* ── BUTTONS ── */
 .btn-main {
   width:100%; padding:17px; border-radius:var(--radius); border:none;
@@ -180,7 +173,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .btn-go:hover { background:#1af5b0; }
 .btn-stop { background:var(--red); color:#fff; }
 .btn-new  { background:var(--bg3); color:var(--text); border:1px solid var(--border2); }
-
 /* ── RESULT ── */
 .result-card {
   background:linear-gradient(135deg,rgba(0,229,160,0.12),rgba(0,229,160,0.05));
@@ -201,7 +193,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .btn-save:active { background:var(--gdim); }
 .btn-save:disabled { opacity:0.4; cursor:default; }
 .btn-save.saved { background:var(--gdim); border-color:var(--green); color:var(--green); }
-
 /* ── ERROR BOX ── */
 .error-box {
   background:var(--rdim); border:1px solid rgba(255,79,109,0.25);
@@ -209,7 +200,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   font-size:12px; color:var(--red); margin-bottom:14px; display:none;
   line-height:1.6; animation:slideUp 0.3s ease;
 }
-
 /* ── HORA PANEL ── */
 .chrono-display { text-align:center; padding:24px 0 20px; }
 .chrono-num { font-family:var(--mono); font-size:56px; font-weight:600; color:var(--text); letter-spacing:0.03em; line-height:1; transition:color 0.3s; }
@@ -218,7 +208,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .tarifa-pill { background:var(--bg3); border-radius:var(--rsm); padding:11px 15px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; }
 .tarifa-pill-label { font-family:var(--mono); font-size:11px; color:var(--text2); }
 .tarifa-pill-val { font-family:var(--mono); font-size:15px; color:var(--amber); font-weight:600; }
-
 /* ── HISTORY ── */
 .history-empty { text-align:center; padding:36px 20px; color:var(--text3); font-family:var(--mono); font-size:13px; line-height:1.6; }
 .trip-item { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--border); animation:slideUp 0.2s ease; }
@@ -240,7 +229,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .total-day-val { font-family:var(--mono); font-size:24px; font-weight:600; color:var(--amber); }
 .btn-clear { width:100%; margin-top:10px; padding:12px; background:none; border:1px solid var(--border2); border-radius:var(--rsm); color:var(--text3); font-family:var(--sans); font-size:13px; font-weight:600; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:all 0.2s; }
 .btn-clear:active { color:var(--red); border-color:rgba(255,79,109,0.3); }
-
 /* ── SETTINGS / TARIFAS ── */
 .setting-row { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--border); }
 .setting-row:last-child { border-bottom:none; }
@@ -249,7 +237,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .setting-val { font-family:var(--mono); font-size:14px; color:var(--amber); font-weight:600; }
 .tip-box { background:var(--adim); border:1px solid rgba(255,181,71,0.18); border-radius:var(--rsm); padding:14px 16px; font-family:var(--mono); font-size:12px; color:rgba(255,181,71,0.7); line-height:1.7; margin-top:14px; }
 .tip-box strong { color:var(--amber); font-weight:600; }
-
 /* ── CALCULAR ── */
 .calc-result-big { background:linear-gradient(135deg,rgba(0,229,160,0.1),rgba(0,229,160,0.04)); border:1px solid rgba(0,229,160,0.22); border-radius:var(--rsm); padding:16px 18px; margin-bottom:12px; }
 .calc-total { font-family:var(--mono); font-size:46px; font-weight:600; color:var(--green); line-height:1; }
@@ -257,7 +244,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .mini-stat { flex:1; background:var(--bg3); border-radius:var(--rsm); padding:11px 10px; text-align:center; }
 .mini-stat-label { font-family:var(--mono); font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px; }
 .mini-stat-val { font-family:var(--mono); font-size:16px; font-weight:600; }
-
 /* ── ESTADÍSTICAS ── */
 .stats-week-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
 .stat-week-box { background:var(--bg3); border:1px solid var(--border); border-radius:var(--rsm); padding:14px 12px; }
@@ -277,7 +263,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .week-title { font-family:var(--mono); font-size:11px; color:var(--text2); letter-spacing:0.05em; }
 .empty-stats { text-align:center; padding:36px 20px; color:var(--text3); font-family:var(--mono); font-size:13px; line-height:1.7; }
 .best-day-badge { display:inline-flex; align-items:center; gap:5px; background:var(--adim); border:1px solid rgba(255,181,71,0.2); border-radius:6px; padding:3px 8px; font-family:var(--mono); font-size:10px; color:var(--amber); margin-top:6px; }
-
 /* ── TOAST ── */
 .toast {
   position:fixed; bottom:24px; left:50%;
@@ -290,7 +275,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 }
 .toast.show { transform:translateX(-50%) translateY(0); }
 .toast.green { color:var(--green); border-color:rgba(0,229,160,0.25); }
-
 /* ── MODAL ── */
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,0.7);
@@ -315,7 +299,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 </style>
 </head>
 <body>
-
 <div class="header">
   <div>
     <div class="header-eyebrow">App personal</div>
@@ -326,7 +309,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     <span id="badge-text">GPS listo</span>
   </div>
 </div>
-
 <div class="tabs">
   <button class="tab active"  onclick="switchTab('viaje',this)">Viaje</button>
   <button class="tab"         onclick="switchTab('calcular',this)">Calcular</button>
@@ -334,11 +316,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   <button class="tab"         onclick="switchTab('estadisticas',this)">Stats</button>
   <button class="tab"         onclick="switchTab('tarifas',this)">Tarifas</button>
 </div>
-
 <!-- ═══ TAB: VIAJE ═══ -->
 <div class="screen active" id="screen-viaje">
   <div class="error-box" id="error-box"></div>
-
   <div class="mode-selector" id="mode-selector">
     <button class="mode-btn active-km" id="btn-modo-km" onclick="setModo('km')">
       <span class="icon">📍</span> Por km
@@ -347,7 +327,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <span class="icon">⏱</span> Por hora
     </button>
   </div>
-
   <!-- Cargos extra -->
   <div id="cargos-container">
     <div class="cargos-label">Cargos adicionales</div>
@@ -357,7 +336,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <button class="cargo-chip" id="chip-zona"  onclick="toggleCargo('zona')">📍 Zona difícil</button>
     </div>
   </div>
-
   <!-- MODO KM -->
   <div id="panel-km">
     <div class="card">
@@ -389,7 +367,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <button class="btn-main btn-go" id="main-btn" onclick="toggleViaje()">Iniciar viaje</button>
     </div>
   </div>
-
   <!-- MODO HORA -->
   <div id="panel-hora" style="display:none;">
     <div class="card">
@@ -408,7 +385,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
       <button class="btn-main btn-go" id="btn-hora" onclick="toggleHora()">Iniciar tiempo</button>
     </div>
   </div>
-
   <!-- RESULTADO -->
   <div id="resultado-card" style="display:none;">
     <div class="result-card">
@@ -421,7 +397,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     <button class="btn-main btn-new" onclick="nuevoViaje()" style="margin-top:12px;">Nuevo viaje</button>
   </div>
 </div>
-
 <!-- ═══ TAB: CALCULAR ═══ -->
 <div class="screen" id="screen-calcular">
   <div class="card">
@@ -456,7 +431,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     <strong>Tip:</strong> Usa tus tarifas actuales. Cámbialas en "Tarifas" y aquí se actualiza solo.
   </div>
 </div>
-
 <!-- ═══ TAB: HISTORIAL ═══ -->
 <div class="screen" id="screen-historial">
   <div class="card">
@@ -473,10 +447,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     <button class="btn-clear" onclick="confirmarLimpiar()">Borrar historial del día</button>
   </div>
 </div>
-
 <!-- ═══ TAB: ESTADÍSTICAS ═══ -->
 <div class="screen" id="screen-estadisticas">
-  <div class="card">
+  <div class="card" id="stats-card">
     <div class="week-nav">
       <button class="week-nav-btn" id="btn-prev-week" onclick="cambiarSemana(-1)">← Anterior</button>
       <span class="week-title" id="week-title">Esta semana</span>
@@ -512,7 +485,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     Sin datos en esta semana.<br>Guarda viajes y aparecerán aquí.
   </div>
 </div>
-
 <!-- ═══ TAB: TARIFAS ═══ -->
 <div class="screen" id="screen-tarifas">
   <div class="card">
@@ -591,7 +563,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     <strong>Sugerencia:</strong> Nocturno actívalo manual al iniciar el viaje. La app aplica el % automáticamente al cobro.
   </div>
 </div>
-
 <!-- MODAL confirmación -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-box">
@@ -603,9 +574,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let modo       = 'km';
@@ -617,31 +586,24 @@ let timerInterval  = null;
 let kmActual   = 0;
 let viajePendiente = null;
 let viajeGuardado  = false;
-
 let horaActivo   = false;
 let horaStart    = null;
 let horaInterval = null;
 let horaSegundos = 0;
-
 // Cargos activos
 let cargosActivos = { noche: false, punta: false, zona: false };
-
 // Historial (hoy)
 let viajes = [];
-
 // Estadísticas — semana offset (0 = esta semana, -1 = semana pasada, etc.)
 let semanaOffset = 0;
 const DIAS = ['dom','lun','mar','mié','jue','vie','sáb'];
-
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 (function init() {
   cargarDatos();
-  guardarTarifas();   // actualiza displays con valores cargados
+  guardarTarifas();
   renderHistorial();
-  // FIX: nocturno automático si es de noche al cargar
   detectarNocturnoAuto();
 })();
-
 function detectarNocturnoAuto() {
   const h = new Date().getHours();
   if (h >= 22 || h < 6) {
@@ -649,7 +611,6 @@ function detectarNocturnoAuto() {
     document.getElementById('chip-noche').className = 'cargo-chip active-noche';
   }
 }
-
 // ─── PERSISTENCIA ─────────────────────────────────────────────────────────────
 function cargarDatos() {
   try {
@@ -672,7 +633,6 @@ function cargarDatos() {
     }
   } catch(e) {}
 }
-
 function persistirTarifas() {
   try {
     localStorage.setItem('cp_tarifas', JSON.stringify({
@@ -686,24 +646,17 @@ function persistirTarifas() {
     }));
   } catch(e) {}
 }
-
 function persistirViajes() {
   try {
-    // Guarda hoy + historial semanal extendido
     const hoy = new Date().toDateString();
     localStorage.setItem('cp_viajes_hoy', JSON.stringify({ fecha: hoy, viajes }));
-
-    // Stats: guarda en clave por fecha ISO
     const iso = isoDate(new Date());
-    const existing = JSON.parse(localStorage.getItem('cp_stats_' + iso) || '[]');
     localStorage.setItem('cp_stats_' + iso, JSON.stringify(viajes));
   } catch(e) {}
 }
-
 function isoDate(d) {
-  return d.toISOString().split('T')[0]; // "2025-01-15"
+  return d.toISOString().split('T')[0];
 }
-
 // ─── FORMATO ──────────────────────────────────────────────────────────────────
 function fmt(n) {
   return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -711,7 +664,6 @@ function fmt(n) {
 function fmtInt(n) {
   return '$' + Math.round(n).toLocaleString('es-MX');
 }
-
 // ─── TOAST ────────────────────────────────────────────────────────────────────
 let toastTimer;
 function showToast(msg, type='') {
@@ -721,7 +673,6 @@ function showToast(msg, type='') {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { el.className = 'toast'; }, 2800);
 }
-
 // ─── MODAL ────────────────────────────────────────────────────────────────────
 let modalCallback = null;
 function mostrarModal(title, sub, label, cb) {
@@ -738,16 +689,14 @@ function cerrarModal() {
 document.getElementById('modal-overlay').addEventListener('click', function(e) {
   if (e.target === this) cerrarModal();
 });
-
 // ─── CARGOS EXTRA ─────────────────────────────────────────────────────────────
 function toggleCargo(tipo) {
-  if (activo || horaActivo) return; // no cambiar en viaje activo
+  if (activo || horaActivo) return;
   cargosActivos[tipo] = !cargosActivos[tipo];
   const chip = document.getElementById('chip-' + tipo);
   const clsMap = { noche:'active-noche', punta:'active-punta', zona:'active-zona' };
   chip.className = 'cargo-chip' + (cargosActivos[tipo] ? ' '+clsMap[tipo] : '');
 }
-
 function calcularCargos(base) {
   const pcts = {
     noche: parseFloat(document.getElementById('pct_noche').value) || 20,
@@ -756,8 +705,9 @@ function calcularCargos(base) {
   };
   let extra = 0;
   const tags = [];
-  for (const [k, activo] of Object.entries(cargosActivos)) {
-    if (activo) {
+  // FIX: renombrado a 'estaActivo' para evitar colisión con variable global 'activo'
+  for (const [k, estaActivo] of Object.entries(cargosActivos)) {
+    if (estaActivo) {
       extra += base * (pcts[k] / 100);
       const nombres = { noche:'Nocturno', punta:'Hora punta', zona:'Zona difícil' };
       tags.push(nombres[k] + ' +' + pcts[k] + '%');
@@ -765,11 +715,12 @@ function calcularCargos(base) {
   }
   return { extra, tags };
 }
-
 // ─── MODO SELECTOR ────────────────────────────────────────────────────────────
 function setModo(m) {
   if (activo || horaActivo) return;
   modo = m;
+  // FIX: limpiar viaje pendiente al cambiar modo
+  viajePendiente = null;
   document.getElementById('panel-km').style.display   = m === 'km'   ? 'block' : 'none';
   document.getElementById('panel-hora').style.display = m === 'hora' ? 'block' : 'none';
   document.getElementById('resultado-card').style.display = 'none';
@@ -777,12 +728,10 @@ function setModo(m) {
   document.getElementById('btn-modo-hora').className = 'mode-btn' + (m === 'hora' ? ' active-hora' : '');
   actualizarTarifaHoraDisplay();
 }
-
 function actualizarTarifaHoraDisplay() {
   const ph = parseFloat(document.getElementById('por_hora').value) || 130;
   document.getElementById('tarifa-hora-display').textContent = '$' + ph + '/hr';
 }
-
 // ─── GPS HELPERS ──────────────────────────────────────────────────────────────
 function deg2rad(d) { return d * Math.PI / 180; }
 function distancia(a, b) {
@@ -795,7 +744,6 @@ function kmTotal() {
   for (let i = 1; i < coords.length; i++) t += distancia(coords[i-1], coords[i]);
   return t;
 }
-
 // ─── VIAJE KM ─────────────────────────────────────────────────────────────────
 function setStatus(tipo, texto) {
   const dot = document.getElementById('status-dot');
@@ -822,11 +770,9 @@ function actualizarTimer() {
   const m = Math.floor(seg/60), s = seg%60;
   document.getElementById('tiempo-display').textContent = m + ':' + (s<10?'0':'') + s;
 }
-
 function toggleViaje() {
   if (!activo) iniciarViaje(); else terminarViaje();
 }
-
 function iniciarViaje() {
   if (!navigator.geolocation) {
     mostrarError('Tu navegador no soporta GPS. Usa Chrome en Android o Safari en iPhone.');
@@ -853,8 +799,10 @@ function iniciarViaje() {
   timerInterval = setInterval(actualizarTimer, 1000);
   watchId = navigator.geolocation.watchPosition(
     pos => {
+      // FIX: filtrar puntos con baja precisión GPS
+      if (pos.coords.accuracy > 40) return;
       const p = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-      if (coords.length === 0 || distancia(coords[coords.length-1], p) > 0.005) coords.push(p);
+      if (coords.length === 0 || distancia(coords[coords.length-1], p) > 0.010) coords.push(p);
       kmActual = kmTotal();
       document.getElementById('km-display').textContent     = kmActual.toFixed(2);
       document.getElementById('puntos-display').textContent = coords.length;
@@ -870,12 +818,11 @@ function iniciarViaje() {
       else if (err.code === 2) msg = 'GPS no disponible. Sal al exterior o activa la ubicación.';
       else if (err.code === 3) msg = 'GPS tardó mucho. Intenta de nuevo al aire libre.';
       mostrarError(msg);
-      terminarViaje(true);   // error = true → no muestra resultado
+      terminarViaje(true);
     },
     { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 }
   );
 }
-
 function terminarViaje(error = false) {
   activo = false;
   if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
@@ -887,13 +834,10 @@ function terminarViaje(error = false) {
   document.getElementById('speed-wrap').classList.remove('visible');
   ['stat-km','stat-tiempo','stat-pts'].forEach(id => document.getElementById(id).classList.remove('live'));
   setBadge('ready');
-
-  // FIX: si fue error, no mostrar resultado
   if (error) {
     setStatus('error', 'Error de GPS');
     return;
   }
-
   setStatus('done', 'Viaje terminado');
   const km = kmActual;
   const { base, detalle } = calcularTarifaBase(km);
@@ -901,7 +845,6 @@ function terminarViaje(error = false) {
   const total = base + extra;
   const seg = startTime ? Math.floor((Date.now()-startTime)/1000) : 0;
   const m = Math.floor(seg/60), s = seg%60;
-
   viajePendiente = {
     tipo:   'km',
     km:     km.toFixed(2),
@@ -912,7 +855,6 @@ function terminarViaje(error = false) {
     tiempo: m + ':' + (s<10?'0':'') + s,
     hora:   new Date().toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' })
   };
-
   document.getElementById('total-final').textContent = fmt(total);
   document.getElementById('breakdown-final').textContent = detalle;
   document.getElementById('cargos-final').textContent = tags.length ? '+ ' + tags.join(' · ') : '';
@@ -921,7 +863,6 @@ function terminarViaje(error = false) {
   document.getElementById('btn-save').className   = 'btn-save';
   document.getElementById('btn-save').textContent = 'Guardar en historial';
 }
-
 // ─── VIAJE HORA ───────────────────────────────────────────────────────────────
 function toggleHora() {
   if (!horaActivo) iniciarHora(); else terminarHora();
@@ -958,7 +899,6 @@ function terminarHora() {
   document.getElementById('status-dot-hora').className   = 'status-dot done';
   document.getElementById('status-text-hora').textContent = 'Tiempo terminado';
   document.getElementById('cronometro').className = 'chrono-num';
-
   const ph = parseFloat(document.getElementById('por_hora').value) || 130;
   const horas = horaSegundos / 3600;
   const base  = ph * horas;
@@ -966,7 +906,6 @@ function terminarHora() {
   const total = base + extra;
   const h = Math.floor(horaSegundos/3600);
   const m = Math.floor((horaSegundos%3600)/60);
-
   viajePendiente = {
     tipo:   'hora',
     km:     '—',
@@ -977,7 +916,6 @@ function terminarHora() {
     tiempo: h + 'h ' + m + 'min',
     hora:   new Date().toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' })
   };
-
   document.getElementById('total-final').textContent = fmt(total);
   document.getElementById('breakdown-final').textContent = h + 'h ' + m + 'min × $' + ph + '/hr';
   document.getElementById('cargos-final').textContent = tags.length ? '+ ' + tags.join(' · ') : '';
@@ -986,7 +924,6 @@ function terminarHora() {
   document.getElementById('btn-save').className   = 'btn-save';
   document.getElementById('btn-save').textContent = 'Guardar en historial';
 }
-
 // ─── GUARDAR VIAJE ────────────────────────────────────────────────────────────
 function guardarViaje() {
   if (!viajePendiente || viajeGuardado) return;
@@ -999,7 +936,6 @@ function guardarViaje() {
   document.getElementById('btn-save').disabled    = true;
   showToast('✓ Viaje guardado', 'green');
 }
-
 function nuevoViaje() {
   document.getElementById('resultado-card').style.display = 'none';
   document.getElementById('km-display').textContent     = '0.00';
@@ -1015,7 +951,6 @@ function nuevoViaje() {
   kmActual = 0; coords = []; horaSegundos = 0;
   viajePendiente = null; viajeGuardado = false;
   ocultarError();
-  // Resetear cargos (excepto nocturno si sigue de noche)
   const esNoche = (() => { const h=new Date().getHours(); return h>=22||h<6; })();
   cargosActivos = { noche: esNoche, punta: false, zona: false };
   ['noche','punta','zona'].forEach(tipo => {
@@ -1024,11 +959,7 @@ function nuevoViaje() {
     chip.className = 'cargo-chip' + (cargosActivos[tipo] ? ' '+clsMap[tipo] : '');
   });
 }
-
 // ─── TARIFAS ──────────────────────────────────────────────────────────────────
-// FIX: fórmula corregida — mínimo cubre los primeros km_minimo km sin costo adicional
-// Para distancias mayores, la tarifa es: minimo + (km - km_minimo) * por_km
-// Interpretación: el mínimo "incluye" km_minimo km; lo que excede se cobra extra
 function calcularTarifaBase(km) {
   const minimo   = parseFloat(document.getElementById('minimo').value)    || 20;
   const kmMinimo = parseFloat(document.getElementById('km_minimo').value) || 1.5;
@@ -1039,20 +970,16 @@ function calcularTarifaBase(km) {
   const base = minimo + (km - kmMinimo) * pKm;
   return { base, detalle: '$' + minimo + ' + ' + (km-kmMinimo).toFixed(2) + 'km × $' + pKm };
 }
-
-// Alias para calcular (tab Calcular y tarifas)
 function calcularTarifa(km) {
   const { base, detalle } = calcularTarifaBase(km);
   return { total: base, detalle };
 }
-
 function guardarTarifas() {
   const minimo  = parseFloat(document.getElementById('minimo').value)    || 20;
   const kmMin   = parseFloat(document.getElementById('km_minimo').value) || 1.5;
   const k       = parseFloat(document.getElementById('por_km').value)    || 6.50;
   const ph      = parseFloat(document.getElementById('por_hora').value)  || 130;
   const pNoche  = parseFloat(document.getElementById('pct_noche').value) || 20;
-
   document.getElementById('prev-minimo').textContent   = '$' + minimo;
   document.getElementById('prev-km').textContent       = '$' + k + '/km';
   document.getElementById('prev-corto').textContent    = 'Hasta ' + kmMin + ' km → $' + minimo + ' fijos';
@@ -1064,7 +991,6 @@ function guardarTarifas() {
   actualizarTarifaHoraDisplay();
   persistirTarifas();
 }
-
 // ─── CALCULAR ─────────────────────────────────────────────────────────────────
 function calcularPresupuesto() {
   const km = parseFloat(document.getElementById('calc-km').value);
@@ -1079,7 +1005,6 @@ function calcularPresupuesto() {
   document.getElementById('calc-tarifa-display').textContent = tarifaTxt;
   document.getElementById('calc-resultado').style.display    = 'block';
 }
-
 // ─── HISTORIAL ────────────────────────────────────────────────────────────────
 function renderHistorial() {
   if (viajes.length === 0) {
@@ -1107,7 +1032,6 @@ function renderHistorial() {
   document.getElementById('total-dia').textContent = fmt(suma);
   document.getElementById('total-dia-box').style.display = 'block';
 }
-
 function confirmarLimpiar() {
   mostrarModal('¿Borrar historial del día?', 'Se eliminan todos los viajes de hoy. No se puede deshacer.', 'Borrar todo', () => {
     viajes = [];
@@ -1116,41 +1040,33 @@ function confirmarLimpiar() {
     showToast('Historial borrado');
   });
 }
-
 // ─── ESTADÍSTICAS ─────────────────────────────────────────────────────────────
 function getLunesDeOffset(offset) {
   const hoy = new Date();
-  const diaSem = hoy.getDay(); // 0=dom,1=lun...
+  const diaSem = hoy.getDay();
   const lunesBase = new Date(hoy);
-  lunesBase.setDate(hoy.getDate() - ((diaSem+6)%7)); // lunes de esta semana
+  lunesBase.setDate(hoy.getDate() - ((diaSem+6)%7));
   lunesBase.setDate(lunesBase.getDate() + offset*7);
   lunesBase.setHours(0,0,0,0);
   return lunesBase;
 }
-
 function renderEstadisticas() {
   const lunes = getLunesDeOffset(semanaOffset);
   const esEsta = semanaOffset === 0;
-
-  // Título semana
   const d1 = lunes.getDate() + ' ' + lunes.toLocaleString('es-MX',{month:'short'});
   const dom = new Date(lunes); dom.setDate(lunes.getDate()+6);
   const d2  = dom.getDate() + ' ' + dom.toLocaleString('es-MX',{month:'short'});
   document.getElementById('week-title').textContent = esEsta ? 'Esta semana' : d1 + ' – ' + d2;
   document.getElementById('btn-next-week').disabled = esEsta;
-
-  // Recopilar datos de los 7 días
   const dias = [];
   let totalIngresos = 0, totalViajes = 0, totalKm = 0;
   const hoy = new Date(); hoy.setHours(23,59,59,999);
-
   for (let i = 0; i < 7; i++) {
     const fecha = new Date(lunes);
     fecha.setDate(lunes.getDate() + i);
     const iso = isoDate(fecha);
     let viajesDia = [];
     try {
-      // Priorizar datos del día actual en memoria
       if (iso === isoDate(new Date())) {
         viajesDia = viajes;
       } else {
@@ -1165,20 +1081,15 @@ function renderEstadisticas() {
     totalViajes   += viajesDia.length;
     totalKm       += kmDia;
   }
-
   const tieneData = totalViajes > 0;
-  document.getElementById('stats-empty').style.display = tieneData ? 'none' : 'block';
-  document.querySelector('#screen-estadisticas .card').style.display = tieneData ? 'block' : 'none';
-
+  // FIX: usar id específico en lugar de querySelector ambiguo
+  document.getElementById('stats-empty').style.display  = tieneData ? 'none'  : 'block';
+  document.getElementById('stats-card').style.display   = tieneData ? 'block' : 'none';
   if (!tieneData) return;
-
-  // Métricas globales
   document.getElementById('sw-ingresos').textContent  = fmtInt(totalIngresos);
   document.getElementById('sw-viajes').textContent    = totalViajes;
   document.getElementById('sw-promedio').textContent  = totalViajes ? fmtInt(totalIngresos/totalViajes) : '$0';
   document.getElementById('sw-km').textContent        = totalKm.toFixed(0);
-
-  // Barra chart
   const maxIng = Math.max(...dias.map(d=>d.ing), 1);
   document.getElementById('bar-chart').innerHTML = dias.map(d => {
     const pct = (d.ing / maxIng * 100).toFixed(1);
@@ -1189,8 +1100,6 @@ function renderEstadisticas() {
       <span class="bar-val">${d.ing > 0 ? fmtInt(d.ing) : '—'}</span>
     </div>`;
   }).join('');
-
-  // Mejor día
   const mejor = dias.reduce((a,b)=>a.ing>b.ing?a:b, {ing:-1});
   const bestRow = document.getElementById('best-day-row');
   if (mejor.ing > 0) {
@@ -1199,13 +1108,11 @@ function renderEstadisticas() {
     bestRow.innerHTML = '';
   }
 }
-
 function cambiarSemana(dir) {
   semanaOffset += dir;
   if (semanaOffset > 0) semanaOffset = 0;
   renderEstadisticas();
 }
-
 // ─── NAVEGACIÓN ───────────────────────────────────────────────────────────────
 function switchTab(name, el) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1215,6 +1122,16 @@ function switchTab(name, el) {
   if (name === 'calcular')      calcularPresupuesto();
   if (name === 'estadisticas')  renderEstadisticas();
 }
+</script>
+<!-- ── PWA: Service Worker ── -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Chofer/sw.js')
+        .then(() => console.log('[PWA] Service Worker registrado'))
+        .catch(err => console.warn('[PWA] Error:', err));
+    });
+  }
 </script>
 </body>
 </html>
